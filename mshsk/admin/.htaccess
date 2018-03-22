@@ -1,0 +1,5 @@
+AuthUserFile /var/www/c0678/data/www/climate.sniish.ru/mshsk/admin/.htpasswd
+AuthType Basic
+AuthName "Admin"
+Require valid-user
+
