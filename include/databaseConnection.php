@@ -11,6 +11,8 @@ $INCLUDE_ROOT = dirname(__FILE__);
 
 //require_once('DB_itit.php');
 require_once($INCLUDE_ROOT.'/../admin/classes/average.php');
+require_once ($INCLUDE_ROOT.'/../admin/classes/Decades.php');
+require_once ($INCLUDE_ROOT.'/../admin/classes/TP.php');
 
 
 //On form loading query ---- maybe it's just for test purposes)))
@@ -92,51 +94,17 @@ $resultDataToAnalyse = getDataFromDatabase( $db, $isEditable, $selectRegion, $se
  * Post section
  *
 */
-if(!empty($_POST)){
-   extract($_POST);
 
+if(!empty($_POST && empty($_POST['T1_1'])) ){
 
-    $updateString = "
-    UPDATE ClimateData_TP 
-    SET
-      T1=$t1,
-      T2=$t2,
-      T3=$t3,
-      T4=$t4,
-      T5=$t5,
-      T6=$t6,
-      T7=$t7,
-      T8=$t8,
-      T9=$t9,
-      T10=$t10,
-      T11=$t11,
-      T12=$t12,
-      P1=$p1,
-      P2=$p2,
-      P3=$p3,
-      P4=$p4,
-      P5=$p5,
-      P6=$p6,
-      P7=$p7,
-      P8=$p8,
-      P9=$p9,
-      P10=$p10,
-      P11=$p11,
-      P12=$p12
-    WHERE
-      YEAR = $year_to_edit AND MeteostationID = $MeteostationID
-    
-    ";
-    $dataToPost = $db-> prepare( $updateString );
+$tp = new TP($db);
+$tp->set($_POST);
 
 
 
 
 
 //Get results al associative array
-$updatedData = $dataToPost->fetchAll(PDO::FETCH_ASSOC);
-    //Execute query
-    $dataToPost -> execute();
 $postRegion = $_POST['MeteostationID'];
 $postYear = $_POST['year_to_edit'];
 
@@ -145,6 +113,10 @@ $resultDataToAnalyse = getDataFromDatabase( $db, $isEditable, $postRegion, $post
 
 
 
+} elseif (!empty($_POST && !empty($_POST['T1_1'])) )
+{
+    $decades = new Decades($db);
+    $decades->set($_POST);
 }
 
 /**

@@ -1,5 +1,6 @@
 <?php
 require_once('../include/databaseConnection.php');
+require_once ('./classes/Decades.php');
 
 ?>
 <!DOCTYPE html>
@@ -34,6 +35,8 @@ require_once('../include/databaseConnection.php');
 
 </head>
 <body>
+<? ?>
+
 <header>
 
     <div class="clearfix fixed-menu">
@@ -156,11 +159,11 @@ require_once('../include/databaseConnection.php');
 						        echo "POST";
 					        }; ?>">
                                 <div class="col-md-6">
-                                    <h4>
+                                    <h4 class ="<? echo(($isEditable)? 'hidden' : '') ?>">
                                         Выберите метеостанцию
                                     </h4>
                                     <div class="input-group">
-                                        <select name="select" class="form-control" name="select_meteostation" id="select_meteostation">
+                                        <select name="select" class="form-control <? echo(($isEditable)? 'hidden' : '') ?>" name="select_meteostation" id="select_meteostation">
 
 									        <?php foreach ($resultMeteostations as $key => $value): ?>
 
@@ -184,8 +187,8 @@ require_once('../include/databaseConnection.php');
                                     </div>
                                 </div>
 
-                                <div class="col-md-6">
-                                    <div class="rom">
+                                <div class="col-md-6 <? echo(($isEditable)? 'hidden' : '') ?>">
+                                    <div class="row">
                                         <div class="col-md-6">
                                             <h4>
                                                 Год - начало
