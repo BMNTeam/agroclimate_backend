@@ -95,7 +95,7 @@ $resultDataToAnalyse = getDataFromDatabase( $db, $isEditable, $selectRegion, $se
  *
 */
 
-if(!empty($_POST && empty($_POST['T1_1'])) ){
+if(!empty($_POST) && empty($_POST['T1_1']) ){
 
 $tp = new TP($db);
 $tp->set($_POST);
@@ -113,7 +113,7 @@ $resultDataToAnalyse = getDataFromDatabase( $db, $isEditable, $postRegion, $post
 
 
 
-} elseif (!empty($_POST && !empty($_POST['T1_1'])) )
+} elseif (!empty($_POST) && !empty($_POST['T1_1']) )
 {
     $decades = new Decades($db);
     $decades->set($_POST);
