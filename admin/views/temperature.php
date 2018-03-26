@@ -202,6 +202,7 @@ $decades_data = $decades->get($_GET['select'], $_GET['year_to_edit'])[0]; ?>
             // Needs to define P and css class in included file, ex: 'P1_1'
             $switch = array('label' => 'P', 'class' => 'precipitation-table');
             include('temperature_decades.php') ?>
+
         <? endif ?>
     </div>
 

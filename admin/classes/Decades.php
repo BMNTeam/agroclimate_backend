@@ -51,10 +51,40 @@ class Decades {
                  "SET $set_sting " .
                  "WHERE Year = $year AND MeteostationID = $meteostation_id";
         $this->db->prepare($query)->execute();
+
+        $this->count_average($post);
     }
 
-    private function count_avarage($post)
+    private function count_average($post)
     {
+        /**
+         * @param $post array of post elements should have 'T1_1' etc
+         * @param $param string might be temperature (T) or precipitations (P)
+         * @return array of elements to insert | ex: [T1 => 2, P1=> 3, ... , P12 => 16]
+         */
+        function get_average($post, $param){
+            $average_arr = array();
+            for($m=1; $m<=12; $m++)
+            {
+                $param_average = null;
+                $sum = null;
+                for($d=1; $d<=3; $d++)
+                {
+                    $param_str = "$param$m".'_'."$d"; // Ex: T1_1
+                    if($post[$param_str] == 'NULL'){ $sum = null; continue;};
+                    $sum += $post[$param_str];
+                }
+                $average = $sum/3; //3 decades
+                if($average === 0) {$average = 'NULL';}; // May be an error if average is equal to 0
+                $param_average = array("$param$m"=> $average); // Example | ['T1 => 12']
+                $average_arr += $param_average;
+                //array_push($param_arr, $param_average);
+            }
+            return $average_arr;
+        }
+
+
+        print_r('lol');
 
     }
 
