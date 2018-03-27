@@ -187,7 +187,7 @@ require_once ('./classes/Decades.php');
                                     </div>
                                 </div>
 
-                                <div class="col-md-6 <? echo(($isEditable)? 'hidden' : '') ?>">
+                                <div class="col-md-6 <? echo(($isEditable) ? 'hidden' : '') ?>">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <h4>

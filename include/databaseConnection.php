@@ -5,7 +5,7 @@
  * Date: 17.01.2017
  * Time: 13:09
  */
-
+//TODO: fix view after saving decades data and getting another information
 // Include directory path
 $INCLUDE_ROOT = dirname(__FILE__);
 
@@ -47,21 +47,24 @@ $year_to_edit = $_GET['year_to_edit'];
 function getDataFromDatabase ( $db, $isEditable, $selectRegion, $selectStartYear, $selectEndYear, $year_to_edit  ){
     $selectString = '';
 
-    if( $selectEndYear == '' && ! $isEditable)
+    if( $selectEndYear == '' && ! $isEditable) // Just get year to edit
     {
         $selectString = "SELECT * FROM ClimateData_TP WHERE MeteostationID=? AND Year = ?";
     }
-    elseif($selectEndYear != '' && ! $isEditable)
+    elseif($selectEndYear != '' && ! $isEditable) // If selected 2 year catch both
     {
         $selectString = "SELECT * FROM ClimateData_TP WHERE MeteostationID=? AND Year BETWEEN ? AND ?";
     }
     elseif( ! empty( $year_to_edit ) && $isEditable )
     {
         $selectString = "SELECT * FROM ClimateData_TP WHERE MeteostationID=? AND Year = ?";
-    } elseif( empty( $year_to_edit) ) {/*always in the end*/
+
+    }elseif( empty( $year_to_edit) ) {/*always in the end*/
 
         $selectString = "SELECT * FROM ClimateData_TP WHERE MeteostationID=? AND Year = ?";
     }
+
+
 
 //Prepare query
     $dataToAnalyse = $db-> prepare( $selectString );
@@ -77,9 +80,10 @@ function getDataFromDatabase ( $db, $isEditable, $selectRegion, $selectStartYear
     }
     $dataToAnalyse->bindValue(3, $selectEndYear, PDO::PARAM_INT);
 
+
 //Execute query
     $dataToAnalyse->execute();
-
+    print_r($dataToAnalyse);
 //Get results al associative array
     return $resultDataToAnalyse = $dataToAnalyse->fetchAll(PDO::FETCH_ASSOC);
 }
@@ -100,10 +104,6 @@ if(!empty($_POST) && empty($_POST['T1_1']) ){
 $tp = new TP($db);
 $tp->set($_POST);
 
-
-
-
-
 //Get results al associative array
 $postRegion = $_POST['MeteostationID'];
 $postYear = $_POST['year_to_edit'];
@@ -113,10 +113,19 @@ $resultDataToAnalyse = getDataFromDatabase( $db, $isEditable, $postRegion, $post
 
 
 
-} elseif (!empty($_POST) && !empty($_POST['T1_1']) )
+} elseif (!empty($_POST) && !empty($_POST['T1_1']) ) // POST with decades
 {
     $decades = new Decades($db);
     $decades->set($_POST);
+
+    //Get results al associative array
+    $postRegion = $_POST['select'];
+    $postYear = $_POST['year_to_edit'];
+
+    //$year_to_edit = null;
+
+//Show changed data
+    $resultDataToAnalyse = getDataFromDatabase( $db, $isEditable, $postRegion, $postYear, $selectEndYear, $postYear);
 }
 
 /**

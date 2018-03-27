@@ -1,4 +1,5 @@
 <?php
+
 class TP {
     private $table = 'ClimateData_TP';
     private $db;
@@ -9,7 +10,7 @@ class TP {
     }
 
     /**
-     * @param array $post should have year_to_edit and select properties | ex: '[select=1]'
+     * @param array $post should have 'year_to_edit' and 'select' properties | ex: '[select=1]'
      */
     public function set($post)
     {
@@ -33,6 +34,7 @@ class TP {
             return rtrim($update, ',');
         }
         $update = generate_update($post);
+
         $query = "UPDATE $this->table
                     SET $update
                   WHERE Year = $year AND MeteostationID = $meteostation_id";

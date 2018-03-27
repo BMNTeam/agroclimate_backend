@@ -1,4 +1,5 @@
 <?php
+include_once('./TP.php');
 
 class Decades {
     private $table_name = "ClimateDataDecade_TP";
@@ -52,9 +53,14 @@ class Decades {
                  "WHERE Year = $year AND MeteostationID = $meteostation_id";
         $this->db->prepare($query)->execute();
 
-        $this->count_average($post);
+        $tp_table = new TP($this->db);
+        $tp_table->set($this->count_average($post));
     }
 
+    /**
+     * @param $post array with decades data | [ select => 1, T1_1 => 12, ... , P12_3 => 16]
+     * @return array average temperatures | ex: [ 'year_to_edit' => 2018, 'T1' => '10' ... ]
+     */
     private function count_average($post)
     {
         /**
@@ -66,7 +72,6 @@ class Decades {
             $average_arr = array();
             for($m=1; $m<=12; $m++)
             {
-                $param_average = null;
                 $sum = null;
                 for($d=1; $d<=3; $d++)
                 {
@@ -75,16 +80,42 @@ class Decades {
                     $sum += $post[$param_str];
                 }
                 $average = $sum/3; //3 decades
-                if($average === 0) {$average = 'NULL';}; // May be an error if average is equal to 0
+                if($average === 0) { $average = 'NULL';}; // Might be an error if average is equal to 0
+
                 $param_average = array("$param$m"=> $average); // Example | ['T1 => 12']
-                $average_arr += $param_average;
-                //array_push($param_arr, $param_average);
+                array_push($average_arr, $param_average);
             }
             return $average_arr;
         }
+        //
 
+        /**
+         * @param $average_arr array of returned from get)average function T and P
+         * @return array string | example ['T1'=> '12', ..., 'P12' => '13']
+         */
+        function prepare_post_request ($average_arr) {
+            $result = null;
+            foreach ($average_arr as $key => $value)
+            {
+                foreach ($value as $key => $value)
+                {
 
-        print_r('lol');
+                    $result[$key] = round($value, 2);
+                    if($value == 'NULL') { $result[$key] = 'NULL'; }; //If round returns 0 then explicitly set it NULL
+                }
+            }
+            return $result;
+        }
+
+        $average_arr =  array_merge(get_average($post, 'T'), get_average($post, 'P'));
+        $result = prepare_post_request($average_arr);
+
+        //Prepare for insert into ClimateData_TP table
+        $result['select'] = $post['select'];
+        $result['year_to_edit'] = $post['year_to_edit'];
+
+        return $result;
+
 
     }
 

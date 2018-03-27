@@ -50,13 +50,11 @@ $decades_data = $decades->get($_GET['select'], $_GET['year_to_edit'])[0]; ?>
                         }
                         echo round($sum / 12, 1);
                         ?></td>
-
-
                 </tr>
-                </tbody>
-                </table>
-
             <?php endforeach; ?>
+
+            </tbody>
+            </table>
         <?php elseif ($isEditable && empty($decades_data)): ?>
 
             <?php foreach ($resultDataToAnalyse as $key => $value): ?>
