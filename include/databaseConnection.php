@@ -10,9 +10,9 @@
 $INCLUDE_ROOT = dirname(__FILE__);
 
 //require_once('DB_itit.php');
-require_once($INCLUDE_ROOT.'/../admin/classes/average.php');
-require_once ($INCLUDE_ROOT.'/../admin/classes/Decades.php');
-require_once ($INCLUDE_ROOT.'/../admin/classes/TP.php');
+require_once($INCLUDE_ROOT.'/../admin/actions/classes/average.php');
+require_once ($INCLUDE_ROOT.'/../admin/actions/classes/Decades.php');
+require_once ($INCLUDE_ROOT.'/../admin/actions/classes/TP.php');
 
 
 //On form loading query ---- maybe it's just for test purposes)))
@@ -83,7 +83,6 @@ function getDataFromDatabase ( $db, $isEditable, $selectRegion, $selectStartYear
 
 //Execute query
     $dataToAnalyse->execute();
-    print_r($dataToAnalyse);
 //Get results al associative array
     return $resultDataToAnalyse = $dataToAnalyse->fetchAll(PDO::FETCH_ASSOC);
 }

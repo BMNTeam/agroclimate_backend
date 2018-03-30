@@ -1,5 +1,5 @@
 <?php
-require_once('../include/databaseConnection.php');
+require_once('../../include/databaseConnection.php');
 require_once ('./classes/Decades.php');
 
 ?>
@@ -50,7 +50,7 @@ require_once ('./classes/Decades.php');
                             <a href="http://www.mshsk.ru/" class="not-link-style">
                                 <div class="logo">
 
-                                    <img src="../img/mshsk.png" class="msh-image fl" alt="Логотип СНИИСХ">
+                                    <img src="../../img/mshsk.png" class="msh-image fl" alt="Логотип СНИИСХ">
                                     <div class="sniish_text msh_text fl">
                                         <p>Министерство селького</p>
                                         <p>хозяйства края</p>
@@ -62,7 +62,7 @@ require_once ('./classes/Decades.php');
                         <figure class="clearfix fl">
                             <a href="http://sniish.ru" class="not-link-style">
                                 <div class="logo fl">
-                                    <img src="../img/sniish-logo.png" class="logo-image fl" alt="Логотип СНИИСХ">
+                                    <img src="../../img/sniish-logo.png" class="logo-image fl" alt="Логотип СНИИСХ">
                                     <div class="sniish_text fl">
                                         <p>Ставропольский</p>
                                         <p>НИИСХ</p>
@@ -296,10 +296,10 @@ require_once ('./classes/Decades.php');
 </footer>
 
 
-<link rel="stylesheet" href="../css/libs.css">
-<link rel="stylesheet" href="../css/main.min.css">
-<script src="../js/scripts.min.js"></script>
-<script src="../js/common.min.js"></script>
+<link rel="stylesheet" href="../../css/libs.css">
+<link rel="stylesheet" href="../../css/main.min.css">
+<script src="../../js/scripts.min.js"></script>
+<script src="../../js/common.min.js"></script>
 
 </body>
 </html>

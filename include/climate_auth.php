@@ -175,7 +175,7 @@ include_once('head.php'); ?>
                                                             дополнительно
                                                         </div>
                                                         <div class="hidden" id="additionalAccessLinks" >
-                                                            <a href="admin/index.php">Как администратор</a> /
+                                                            <a href="admin/actions/index.php">Как администратор</a> /
                                                             <a href="manager/index.php">Как менеджер</a>
                                                         </div>
                                                     </div>
