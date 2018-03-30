@@ -35,7 +35,6 @@ require_once ('./classes/Decades.php');
 
 </head>
 <body>
-<? ?>
 
 <header>
 
