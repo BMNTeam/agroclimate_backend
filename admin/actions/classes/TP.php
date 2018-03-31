@@ -8,6 +8,12 @@ class TP {
     {
         $this->db = $db;
     }
+    public function get($sql)
+    {
+        $sql = "SELECT * FROM ClimateData_TP " . $sql;
+        $meteostations = $this->db->query($sql);
+        return $meteostations->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     /**
      * @param array $post should have 'year_to_edit' and 'select' properties | ex: '[select=1]'
