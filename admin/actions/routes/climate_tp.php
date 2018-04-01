@@ -21,3 +21,16 @@ if( $_GET['mode'] === 'single') {
     return;
 
 }
+
+if( $_GET['mode'] === 'plural') {
+
+    $year_start = $_GET['yearStart'];
+    $year_end = $_GET['yearEnd'];
+    $meteostationId = $_GET['meteostationId'];
+
+    $query = "WHERE Year BETWEEN $year_start AND $year_end  AND MeteostationID=$meteostationId";
+    $result = $tp->get($query);
+    print json_encode( $result );
+    return;
+
+}

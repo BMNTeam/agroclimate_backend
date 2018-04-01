@@ -11,20 +11,21 @@
                         <div class="container-elements clearfix clearfix last-container">
 
                             <div class="col-md-12">
-                                <div class="economy-content--wrapper">
+                                <div class="">
 
                                     <!--Start information section-->
 
-                                    <div class="col-md-12">
+                                    <div *ngIf="false" class="col-md-12">
                                         <div class="current-status bg-success">
                                             <h3>Изменения успешно сохранены</h3>
                                         </div>
                                     </div>
                                     <!--End information section-->
+                                    <br>
 
 
-                                    <!--Global sending form-->
-                                    <app-select-data></app-select-data>
+
+                                    <router-outlet> </router-outlet>
                                 </div>
                             </div>
                         </div>

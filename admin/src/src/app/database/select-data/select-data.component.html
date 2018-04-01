@@ -1,0 +1,51 @@
+<form action="index.php" #f="ngForm" id="get_data" (submit)="$event.preventDefault(); submit(f); " >
+  <div class="col-md-6">
+    <h4 class ="">
+      Выберите метеостанцию
+    </h4>
+    <div class="input-group">
+      <select ngModel="{{request.meteostationId}}" name="meteostationId" ngModel class="form-control" required>
+        <option  *ngFor="let meteostation of meteostations"
+          value="{{ meteostation.ID }}"> {{ meteostation.Name }}</option>
+      </select>
+
+    </div>
+    <!--TODO: add functionality-->
+    <div *ngIf="false" class="form-group">
+      <input type="checkbox" name="edit" (change)="editing = !editing" > Редактировать <br>
+      <input *ngIf="editing" name="yearToEdit" ngModel="{{request.yearToEdit}}" type="text" required placeholder="Год для редактирования"  class=" form-control year_to_edit" value="">
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="row">
+      <div class="col-md-6">
+        <h4>
+          Год - начало
+        </h4>
+        <div class="form-group">
+          <input type="text" name="yearStart" [disabled]="editing" ngModel="{{request.yearStart}}" required class="form-control year-input" placeholder="2000">
+        </div>
+      </div>
+      <div class="col-md-6">
+
+        <h4>
+          Год - конец
+        </h4>
+        <div class="form-group">
+          <input type="text" name="yearEnd" ngModel [disabled]="editing" class="form-control year-input" placeholder="2015">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+
+    <div class="form-group">
+      <input [disabled]="!f.valid"  class="btn btn-lg btn-default " type="submit" value="Получить">
+
+    </div>
+  </div>
+  <!--             Temperature section-->
+
+  <!--End temperature section-->
+</form>
