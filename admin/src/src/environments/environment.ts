@@ -5,6 +5,6 @@
 
 export const environment = {
     production: false,
-    URL: 'http://climate.sniish.ru/admin/actions/'
+    URL: 'http://agroclimate.com:8888/admin/actions/'
 
 };
