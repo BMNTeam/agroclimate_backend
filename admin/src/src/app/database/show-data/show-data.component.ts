@@ -87,7 +87,7 @@ export class ShowDataComponent implements OnInit {
 
         for(let key in item) {
             if(key.indexOf('T') === -1) continue;
-            sum += item[key];
+            sum += parseFloat(item[key]);
             count++;
 
         }
@@ -99,7 +99,7 @@ export class ShowDataComponent implements OnInit {
 
         for(let key in item) {
             if(key.indexOf('P') === -1) continue;
-            sum += item[key];
+            sum += parseFloat(item[key]);
 
         }
         return Math.floor(sum*100)/100;
