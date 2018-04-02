@@ -4,7 +4,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {ConnectionService, Meteostation} from "../connection.service";
 
 interface showRequest extends Request {
-    mode: string
+    mode: string,
+    custom?: string
 }
 
 interface WeatherInfo {
@@ -48,8 +49,7 @@ export class ShowDataComponent implements OnInit {
 
     constructor(private connectionService: ConnectionService,
                 private route: ActivatedRoute,
-                private router: Router
-                ) {
+                private router: Router) {
     }
 
     ngOnInit() {
@@ -70,54 +70,75 @@ export class ShowDataComponent implements OnInit {
 
     }
 
-    private getTPData(data: showRequest)
-    {
-        if(!data.yearEnd) {
-            data.mode = 'single'
+    private getTPData(data: showRequest) {
+        if (!data.yearEnd) {
+            data.mode = 'single';
+            data.yearEnd = 0; // Use in Average class
+        }
+        if (isNaN(data.meteostationId)) { //if custom zone
+            data.mode = 'custom';
         }
         this.connectionService.getTP(data).subscribe(
             res => this.info = res
         )
     }
 
-    public getAverage(item: Object): number
-    {
+    public getAverage(item: Object): number {
         let count = 0;
         let sum = 0;
 
-        for(let key in item) {
-            if(key.indexOf('T') === -1 || !item[key]) continue;
-
+        for (let key in item) {
+            if (key.indexOf('T') === -1 || !item[key]) continue; //last check for 'null'
             sum += parseFloat(item[key]);
             count++;
-            console.dir(sum);
 
         }
 
-        return Math.floor(sum/count*100)/100;
+        return Math.floor(sum / count * 100) / 100;
     }
-    public getSum(item: Object): number
-    {
+
+    public getSum(item: Object): number {
         let sum = 0;
 
-        for(let key in item) {
-            if(key.indexOf('P') === -1 || !item[key]) continue;
+        for (let key in item) {
+            if (key.indexOf('P') === -1 || !item[key]) continue;
             sum += parseFloat(item[key]);
-
         }
-        return Math.floor(sum*100)/100;
+        return Math.floor(sum * 100) / 100;
     }
 
-    private setMeteostation(id: number)
-    {
+    private setMeteostation(id: number) {
         this.connectionService.getMeteostationsList('all').subscribe(
-            i => this.meteostation = i.filter( i => i.ID == id)[0].Name
+            i => {
+                let meteostation: Meteostation = i.filter(i => i.ID == id)[0];
+                if (!meteostation) {
+                    this.meteostation = this.getCustomZone(id.toString())
+                } else {
+                    this.meteostation = meteostation.Name;
+                }
+
+            }
         )
 
     }
 
-    private back()
+    private getCustomZone(id: string) :string
     {
+        switch (id) {
+            case "region":
+                return "Регион";
+            case "first_zone":
+                return "Первая зона";
+            case "second_zone":
+                return  "Вторая зона";
+            case "third_zone":
+                return "Третья зона";
+            case "fourth_zone":
+                return "Четвертая зона"
+        }
+    }
+
+    private back(): void {
         this.router.navigate(['', this.request.meteostationId, this.request.yearStart]);
     }
 

@@ -5,6 +5,10 @@ import {ActivatedRoute, Router} from "@angular/router";
 
 enum Mode {Edit, View};
 
+interface CustomZone extends Meteostation {
+    custom: boolean
+}
+
 export interface Request {
     meteostationId: number,
     yearStart: number,
@@ -43,18 +47,19 @@ export class SelectDataComponent implements OnInit {
     private getMeteostationList() {
         this.connectionService.getMeteostationsList('all').subscribe( (val) => {
             this.meteostations = val;
-            this.addCustomZones(this.meteostations);
+            this.addCustomZones(this.meteostations as CustomZone[]);
 
         })
 
     }
-    private  addCustomZones(meteostations: Meteostation[]): Meteostation[]
+    private  addCustomZones(meteostations: CustomZone[]): CustomZone[]
     {
         meteostations.push(
-            {ID: 'first_zone', Name: 'Зона 1'},
-            {ID: 'second_zone', Name: 'Зона 2'},
-            {ID: 'third_zone', Name: 'Зона 3'},
-            {ID: 'fourth_zone', Name: 'Зона 4'}
+            {ID: 'region', Name: 'Регион', custom: true},
+            {ID: 'first_zone', Name: 'Зона 1', custom: true},
+            {ID: 'second_zone', Name: 'Зона 2', custom: true} ,
+            {ID: 'third_zone', Name: 'Зона 3', custom: true},
+            {ID: 'fourth_zone', Name: 'Зона 4', custom: true}
         );
         return meteostations;
 

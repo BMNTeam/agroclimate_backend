@@ -10,7 +10,7 @@
 $INCLUDE_ROOT = dirname(__FILE__);
 
 //require_once('DB_itit.php');
-require_once($INCLUDE_ROOT.'/../admin/actions/classes/average.php');
+require_once($INCLUDE_ROOT . '/../admin/actions/classes/Average.php');
 require_once ($INCLUDE_ROOT.'/../admin/actions/classes/Decades.php');
 require_once ($INCLUDE_ROOT.'/../admin/actions/classes/TP.php');
 

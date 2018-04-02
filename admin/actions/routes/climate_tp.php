@@ -2,6 +2,7 @@
 header('Access-Control-Allow-Origin: *');
 require_once('../classes/TP.php');
 require_once('../../../include/DB_itit.php');
+require_once('../controllers/custom_zones.php');
 /**
  * Created by PhpStorm.
  * User: maksimbarsukov
@@ -33,4 +34,14 @@ if( $_GET['mode'] === 'plural') {
     print json_encode( $result );
     return;
 
+}
+
+if( $_GET['mode'] === 'custom')
+{
+    $zone = $_GET['meteostationId'];
+    $year_start = $_GET['yearStart'];
+    $year_end = $_GET['yearEnd'];
+
+    print json_encode(getCustomZonesInfo($zone, $year_start, $year_end, $db));
+    return;
 }
