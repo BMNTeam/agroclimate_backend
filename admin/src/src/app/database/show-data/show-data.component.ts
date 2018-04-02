@@ -86,11 +86,14 @@ export class ShowDataComponent implements OnInit {
         let sum = 0;
 
         for(let key in item) {
-            if(key.indexOf('T') === -1) continue;
+            if(key.indexOf('T') === -1 || !item[key]) continue;
+
             sum += parseFloat(item[key]);
             count++;
+            console.dir(sum);
 
         }
+
         return Math.floor(sum/count*100)/100;
     }
     public getSum(item: Object): number
@@ -98,7 +101,7 @@ export class ShowDataComponent implements OnInit {
         let sum = 0;
 
         for(let key in item) {
-            if(key.indexOf('P') === -1) continue;
+            if(key.indexOf('P') === -1 || !item[key]) continue;
             sum += parseFloat(item[key]);
 
         }
