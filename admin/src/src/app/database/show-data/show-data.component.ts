@@ -10,6 +10,7 @@ interface showRequest extends Request {
 
 interface WeatherInfo {
     Year: number,
+    MeteostationID: number,
     T1: number,
     T2: number,
     T3: number,
@@ -44,6 +45,7 @@ interface WeatherInfo {
 export class ShowDataComponent implements OnInit {
     request: showRequest;
     info: WeatherInfo[];
+    editable: boolean = true;
 
     meteostation: string;
 
@@ -112,7 +114,8 @@ export class ShowDataComponent implements OnInit {
             i => {
                 let meteostation: Meteostation = i.filter(i => i.ID == id)[0];
                 if (!meteostation) {
-                    this.meteostation = this.getCustomZone(id.toString())
+                    this.meteostation = this.getCustomZone(id.toString());
+                    this.editable = false;
                 } else {
                     this.meteostation = meteostation.Name;
                 }
@@ -136,6 +139,11 @@ export class ShowDataComponent implements OnInit {
             case "fourth_zone":
                 return "Четвертая зона"
         }
+    }
+
+    private edit(meteostationId: string, year: number)
+    {
+        this.router.navigate(['edit', meteostationId, year]);
     }
 
     private back(): void {

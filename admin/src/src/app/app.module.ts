@@ -11,13 +11,15 @@ import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import { ShowDataComponent } from './database/show-data/show-data.component';
 import {RouterModule, Routes} from "@angular/router";
+import { EditDataComponent } from './database/edit-data/edit-data.component';
 
 
 const appRoutes: Routes = [
     {path: 'show/:meteostationId/:yearStart', component: ShowDataComponent},
     {path: 'show/:meteostationId/:yearStart/:yearEnd', component: ShowDataComponent},
     {path: '',component: SelectDataComponent    },
-    {path: ':meteostationId/:yearStart',component: SelectDataComponent    }
+    {path: ':meteostationId/:yearStart',component: SelectDataComponent    },
+    {path: 'edit/:meteostationId/:yearStart', component: EditDataComponent}
 ]
 
 @NgModule({
@@ -27,7 +29,8 @@ const appRoutes: Routes = [
     FooterComponent,
       MainComponent,
     SelectDataComponent,
-    ShowDataComponent
+    ShowDataComponent,
+    EditDataComponent
   ],
   imports: [
     BrowserModule,

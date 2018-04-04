@@ -11,13 +11,22 @@ export interface Meteostation {
 
 @Injectable()
 export class ConnectionService {
+    meteostations: Meteostation[];
 
     constructor(private http: HttpClient) {
+        this.setMeteostations();
     }
 
     public getMeteostationsList(param: string): Observable<Meteostation[]>
     {
         return this.http.get<Meteostation[]>(environment.URL + 'routes/meteostations.php' + `?${param}`);
+    }
+
+    private setMeteostations(): void
+    {
+        this.getMeteostationsList('all').subscribe(
+            res => this.meteostations = res
+        )
     }
 
     public getTP(data: any): Observable <any>

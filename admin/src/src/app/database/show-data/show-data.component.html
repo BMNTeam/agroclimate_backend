@@ -33,7 +33,12 @@
                 <td *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12]">
                     {{item['T'+i]}}
                 </td>
-                <td>{{getAverage(item)}}</td>
+                <td>{{getAverage(item)}}
+                    <button *ngIf="editable" (click)="edit(item.MeteostationID, item.Year)"
+                            title="Редактировать" class="edit">
+                        <i class="fa fa-pencil"></i>
+                    </button>
+                </td>
 
             </tr>
             </tbody>
@@ -67,7 +72,12 @@
                 <td *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12]">
                     {{item['P'+i]}}
                 </td>
-                <td>{{getSum(item)}}</td>
+                <td>{{getSum(item)}}
+                    <button *ngIf="editable" (click)="edit(item.MeteostationID, item.Year)"
+                            title="Редактировать" class="edit">
+                        <i class="fa fa-pencil"></i>
+                    </button>
+                </td>
 
             </tr>
             </tbody>
