@@ -20,7 +20,7 @@ class Decades {
         $sql = "SELECT * FROM $this->table_name WHERE MeteostationID = $meteostation_id AND  Year = $year";
 
         $query = $this->db->query($sql);
-        $response = $query->fetchAll();
+        $response = $query->fetchAll(PDO::FETCH_ASSOC);
         return $response;
 
 

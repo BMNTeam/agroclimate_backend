@@ -1,57 +1,65 @@
 <div class="col-md-12">
-  <a (click)="back()">←назад</a> | <a (click)="home()"><i class="fa fa-home"></i> главная</a>
-  <h1>{{ meteostation }} | {{ year}}</h1>
+    <a (click)="back()">←назад</a> | <a (click)="home()"><i class="fa fa-home"></i> главная</a>
+    <h1>{{ meteostation }} | {{ year}}</h1>
 </div>
 
 <div>
-  <div class="col-md-12">
-    <h2>Температура</h2>
+    <div class="col-md-12">
+        <h2>Температура</h2>
+        <div class="row">
+            <div *ngFor="let month of months; let i = index" class="col-md-4">
+                <table class="table table-hover table-responsive table-temperature">
+                    <thead>
+                    <tr>
+                        <th>Месяц</th>
+                        <th>I дек</th>
+                        <th>II дек</th>
+                        <th>III дек</th>
+                    </tr>
+                    </thead>
+                    <tbody>
 
-    <table class="table table-hover table-responsive table-temperature">
-      <thead>
-      <tr>
-        <th>Месяц</th>
-        <th>I дек</th>
-        <th>II дек</th>
-        <th>III дек</th>
-      </tr>
-      </thead>
-      <tbody>
+                    <tr>
+                        <td>{{month}}</td>
+                        <td><input class="input-editable" type="text" [(ngModel)]="request['T'++(i+1)+'_1']"></td>
+                        <td><input class="input-editable" type="text" [(ngModel)]="request['T'++(i+1)+'_2']"></td>
+                        <td><input class="input-editable" type="text" [(ngModel)]="request['T'++(i+1)+'_3']"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
-      <tr>
-        <td>Январь</td>
-        <td><input class="input-editable" type="text" value="" name=""></td>
-        <td><input class="input-editable" type="text" value="" name=""></td>
-        <td><input class="input-editable" type="text" value="" name=""></td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
 
-  <div class="col-md-12">
-    <h2>Осадки</h2>
-    <table class="table table-hover table-responsive precipitation-table">
-      <thead>
-      <tr>
-        <th>Месяц</th>
-        <th>I дек</th>
-        <th>II дек</th>
-        <th>III дек</th>
-      </tr>
-      </thead>
-      <tbody>
+    <div class="col-md-12">
+        <h2>Осадки</h2>
+        <div class="row">
+            <div *ngFor="let month of months; let i = index" class="col-md-4">
+                <table class="table table-hover table-responsive precipitation-table">
+                    <thead>
+                    <tr>
+                        <th>Месяц</th>
+                        <th>I дек</th>
+                        <th>II дек</th>
+                        <th>III дек</th>
+                    </tr>
+                    </thead>
+                    <tbody>
 
-      <tr>
-        <td>Январь</td>
-        <td><input class="input-editable" type="text" value="" name=""></td>
-        <td><input class="input-editable" type="text" value="" name=""></td>
-        <td><input class="input-editable" type="text" value="" name=""></td>
-      </tr>
-      </tbody>
-    </table>
-    <br>
+                    <tr>
+                        <td>{{month}}</td>
+                        <td><input class="input-editable" type="text" [(ngModel)]="request['P'++(i+1)+'_1']"></td>
+                        <td><input class="input-editable" type="text" [(ngModel)]="request['P'++(i+1)+'_2']"></td>
+                        <td><input class="input-editable" type="text" [(ngModel)]="request['P'++(i+1)+'_3']"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br>
 
-  </div>
+    </div>
 </div>
 
 

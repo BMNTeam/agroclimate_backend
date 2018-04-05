@@ -45,7 +45,7 @@ export class SelectDataComponent implements OnInit {
     }
 
     private getMeteostationList() {
-        this.connectionService.getMeteostationsList('all').subscribe( (val) => {
+        this.connectionService.meteostations.subscribe( (val) => {
             this.meteostations = val;
             this.addCustomZones(this.meteostations as CustomZone[]);
 
