@@ -66,9 +66,9 @@ class Decades {
         /**
          * @param $post array of post elements should have 'T1_1' etc
          * @param $param string might be temperature (T) or precipitations (P)
-         * @return array of elements to insert | ex: [T1 => 2, P1=> 3, ... , P12 => 16]
+         * @return array of elements to insert | ex: [T1 => 2, T2=> 3, ... , T12 => 16]
          */
-        function get_average($post, $param){
+        function get_averages($post, $param){
             $average_arr = array();
             for($m=1; $m<=12; $m++)
             {
@@ -86,6 +86,32 @@ class Decades {
                 array_push($average_arr, $param_average);
             }
             return $average_arr;
+        }
+
+
+        /**
+         * @param $post array of post elements should have 'P1_1' etc
+         * @param $param string might be temperature (T) or precipitations (P)
+         * @return array of sums elements | ex: [P1 => 2, P2=> 3, ... , P12 => 16]
+         */
+        function get_sums($post, $param)
+        {
+            $sum_arr = array();
+            for($m=1; $m<=12; $m++)
+            {
+                $sum = null;
+                for($d=1; $d<=3; $d++)
+                {
+                    $param_str = "$param$m".'_'."$d"; // Ex: T1_1
+                    if($post[$param_str] == 'NULL'){ $sum = null; continue;};
+                    $sum += $post[$param_str];
+                }
+                (!$sum) ? $sum = 'NULL': $sum;
+
+                $param_sum = array("$param$m"=> $sum);
+                array_push($sum_arr, $param_sum);
+            }
+            return $sum_arr;
         }
         //
 
@@ -107,7 +133,7 @@ class Decades {
             return $result;
         }
 
-        $average_arr =  array_merge(get_average($post, 'T'), get_average($post, 'P'));
+        $average_arr =  array_merge(get_averages($post, 'T'), get_sums($post, 'P'));
         $result = prepare_post_request($average_arr);
 
         //Prepare for insert into ClimateData_TP table

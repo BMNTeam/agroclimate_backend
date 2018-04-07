@@ -89,7 +89,7 @@ export class EditDataComponent implements OnInit {
             i => {
                 if(this.request[i]) this.request[i] = +this.request[i]; //Skip empty values
             }
-        )
+        );
     }
     public submit()
     {
@@ -98,5 +98,16 @@ export class EditDataComponent implements OnInit {
         this.connectionSrv.saveDecadesData(this.request).subscribe(
             res => this.back()
         )
+    }
+
+    /**
+     * Validate key | continue if key are: Number, Dot, Backspace, Tab
+     * @param {KeyboardEvent} event
+     */
+    public validate(event: KeyboardEvent)
+    {
+        if(event && event.key.match(/\d/) ||
+            (event.key == '.' || event.keyCode == 8 || event.keyCode == 9) ) return;
+        event.preventDefault();
     }
 }

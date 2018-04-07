@@ -3,7 +3,7 @@
     <h1>{{ meteostation }} | {{ year}}</h1>
 </div>
 
-<div>
+<div (keydown.enter)="submit()">
     <div class="col-md-12">
         <h2>Температура</h2>
         <div class="row">
@@ -19,11 +19,11 @@
                     </thead>
                     <tbody>
 
-                    <tr>
+                    <tr >
                         <td>{{month}}</td>
-                        <td><input class="input-editable" type="text" [(ngModel)]="request['T'++(i+1)+'_1']"></td>
-                        <td><input class="input-editable" type="text" [(ngModel)]="request['T'++(i+1)+'_2']"></td>
-                        <td><input class="input-editable" type="text" [(ngModel)]="request['T'++(i+1)+'_3']"></td>
+                        <td><input (keydown)="validate($event)" class="input-editable" type="text" [(ngModel)]="request['T'++(i+1)+'_1']"></td>
+                        <td><input (keydown)="validate($event)" class="input-editable" type="text" [(ngModel)]="request['T'++(i+1)+'_2']"></td>
+                        <td><input (keydown)="validate($event)" class="input-editable" type="text" [(ngModel)]="request['T'++(i+1)+'_3']"></td>
                     </tr>
                     </tbody>
                 </table>
@@ -49,9 +49,9 @@
 
                     <tr>
                         <td>{{month}}</td>
-                        <td><input class="input-editable" type="text" [(ngModel)]="request['P'++(i+1)+'_1']"></td>
-                        <td><input class="input-editable" type="text" [(ngModel)]="request['P'++(i+1)+'_2']"></td>
-                        <td><input class="input-editable" type="text" [(ngModel)]="request['P'++(i+1)+'_3']"></td>
+                        <td><input (keydown)="validate($event)" class="input-editable" type="text" [(ngModel)]="request['P'++(i+1)+'_1']"></td>
+                        <td><input (keydown)="validate($event)" class="input-editable" type="text" [(ngModel)]="request['P'++(i+1)+'_2']"></td>
+                        <td><input (keydown)="validate($event)" class="input-editable" type="text" [(ngModel)]="request['P'++(i+1)+'_3']"></td>
                     </tr>
                     </tbody>
                 </table>
