@@ -4,10 +4,10 @@ import {ConnectionService, DecadesGetParams} from "../connection.service";
 
 
 
-interface EditRequest {
+export interface EditRequest {
     MeteostationID: number,
     Year: number,
-    [key: string]: string | number
+    [key: string]: number | string
 }
 
 @Component({
@@ -63,7 +63,6 @@ export class EditDataComponent implements OnInit {
 
         this.connectionSrv.getDecadesData(params).subscribe(
             res => {
-                console.dir(res);
                Object.keys(res[0]).forEach(i => this.request[i] = res[0][i])
             }
         )
@@ -82,5 +81,22 @@ export class EditDataComponent implements OnInit {
     private home(): void
     {
         this.router.navigate(['', this.request.MeteostationID, this.request.Year]);
+    }
+
+    private reqToNum()
+    {
+        Object.keys(this.request).map(
+            i => {
+                if(this.request[i]) this.request[i] = +this.request[i]; //Skip empty values
+            }
+        )
+    }
+    public submit()
+    {
+
+        this.reqToNum();
+        this.connectionSrv.saveDecadesData(this.request).subscribe(
+            res => this.back()
+        )
     }
 }

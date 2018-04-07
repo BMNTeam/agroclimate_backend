@@ -3,8 +3,7 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {Observable} from "rxjs/Observable";
 import {Subject} from "rxjs/Subject";
-import {HttpParamsOptions} from "@angular/common/http/src/params";
-
+import {EditRequest} from "./edit-data/edit-data.component";
 
 export interface Meteostation {
     ID: number | string,
@@ -36,6 +35,14 @@ export class ConnectionService {
         this.getMeteostationsList('all').subscribe(
             res => this.meteostations.next(res)
         )
+    }
+
+    public saveDecadesData(save: EditRequest): Observable<EditRequest>
+    {
+        let headers = {
+            'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
+        };
+        return this.http.post<EditRequest>(environment.URL + "routes/decades_tp.php", {save}, {headers})
     }
 
     public getDecadesData(reqParams: DecadesGetParams)

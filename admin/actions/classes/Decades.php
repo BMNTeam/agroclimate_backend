@@ -1,5 +1,5 @@
 <?php
-include_once('./TP.php');
+include('TP.php');
 
 class Decades {
     private $table_name = "ClimateDataDecade_TP";
@@ -27,8 +27,8 @@ class Decades {
     }
     public function set($post)
     {
-        $year = $post['year_to_edit'];
-        $meteostation_id = $post['select'];
+        $year = $post['Year'];
+        $meteostation_id = $post['MeteostationID'];
 
         $columns_arr = explode(',', rtrim($this->generate_columns(), ','));
 
@@ -90,7 +90,7 @@ class Decades {
         //
 
         /**
-         * @param $average_arr array of returned from get)average function T and P
+         * @param $average_arr array of returned from get_average function T and P
          * @return array string | example ['T1'=> '12', ..., 'P12' => '13']
          */
         function prepare_post_request ($average_arr) {
@@ -111,8 +111,8 @@ class Decades {
         $result = prepare_post_request($average_arr);
 
         //Prepare for insert into ClimateData_TP table
-        $result['select'] = $post['select'];
-        $result['year_to_edit'] = $post['year_to_edit'];
+        $result['MeteostationID'] = $post['MeteostationID'];
+        $result['Year'] = $post['Year'];
 
         return $result;
 
@@ -225,6 +225,22 @@ class Decades {
             $is_exist = false;
         }
         return $is_exist;
+    }
+
+    /**
+     * Replace empty value with NULL
+     * example: ['T1_3'-> ''...] converts to ['T1_3' => 'NULL']
+     * @Param $dates JSON data
+     * @return array $post without empty values
+     *
+    */
+    public function addNull($datas)
+    {
+        $post = array();
+        foreach ($datas as $key => $val){
+            (!$val)? ($post += [$key => "NULL"]) : ($post += [$key => $val]);
+        }
+        return $post;
     }
 
 

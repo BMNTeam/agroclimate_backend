@@ -20,8 +20,8 @@ class TP {
      */
     public function set($post)
     {
-        $year = $post['year_to_edit'];
-        $meteostation_id = $post['select'];
+        $year = $post['Year'];
+        $meteostation_id = $post['MeteostationID'];
 
         /**
          * @param array $post should have Ti and Pi properties | ex: 'T1,T2'
