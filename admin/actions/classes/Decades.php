@@ -1,14 +1,18 @@
 <?php
 include('TP.php');
+include('Helpers.php');
 
 class Decades {
     private $table_name = "ClimateDataDecade_TP";
     private $db;
+    private $helpers;
 
 
     public function __construct($db)
     {
         $this->db = $db;
+        $this->helpers = new Helpers();
+
         //$this->migrate();
         //$this->insert_empty_year(2018);
     }
@@ -55,6 +59,9 @@ class Decades {
 
         $tp_table = new TP($this->db);
         $tp_table->set($this->count_average($post));
+
+        $gtk_table = new Gtk($this->db);
+        $gtk_table->count_gtk($post);
     }
 
     /**
@@ -191,54 +198,14 @@ class Decades {
 
         $decades = rtrim($this->generate_columns(), ',');
 
-        /**
-         * @param string $decades of decades
-         * @param string $year to insert
-         * @return array of decades separated by meteostation_id | example: ['1, 2018, NULL, NULL...']
-         */
-        function generate_insert($decades, $year)
-        {
-            $decades = explode(',', $decades);
 
-            $sql_str = null;
-            $sql_array = Array();
-
-            for($i = 1; $i <= 16; $i++)
-            {
-                $sql_str .= "$i, $year,";
-                foreach ($decades as $decade)
-                {
-                    $sql_str .= "NULL,";
-                }
-                // pushed item example: '1, 2020, NULL ... NULL'
-                array_push($sql_array, rtrim($sql_str, ','));
-                $sql_str = null;
-                
-            }
-            return $sql_array;
-        }
-
-        /**
-         * @param array $values_arr
-         * @return string $values_str | example: '(1, 2020, NULL, ... NULL),(...),'
-         */
-        function generate_values($values_arr)
-        {
-            $values_str = '';
-            //Wrap values in brackets
-            foreach ($values_arr as $key => $value) {
-                $values_str .= "(" . "$value" .")";
-                $values_str .= ",";
-            }
-            return $values_str;
-        }
-        $values = generate_insert($decades, $year);
-        $values = rtrim(generate_values($values), ',');
+        $values = $this->helpers->generate_insert($decades, $year);
+        $values = rtrim($this->helpers->generate_values($values), ',');
 
 
-        $sql = "INSERT INTO $this->table_name (MeteostationID, Year, $decades)" .
+        $query = "INSERT INTO $this->table_name (MeteostationID, Year, $decades)" .
                "VALUES $values";
-        $this->db->prepare($sql)->execute();
+        $this->db->prepare($query)->execute();
 
     }
 
