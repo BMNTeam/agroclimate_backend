@@ -423,7 +423,7 @@ $Meteostations[17] = "Ставропольский край";
                                                     }
                                                 }
 
-                                                require_once('./admin/charts/index.php');
+                                                require_once('./admin/actions/charts/index.php');
                                                 createColumnChart($Legend1, $Legend2, $BaseValueTr, $AnalyzeValueTr);
 
                                                 echo "<p>Сравнение количества осадков нарастающим итогом.</p>";

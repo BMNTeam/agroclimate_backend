@@ -48,7 +48,10 @@ export class EditDataComponent implements OnInit {
 
             this.year = route.yearStart;
             this.connectionSrv.meteostations
-                .subscribe(res => this.meteostation = res.filter( i => i.ID === +route.meteostationId)[0].Name
+                .subscribe(res => {
+                   if (!res.filter( i => i.ID === +route.meteostationId)[0] ) return;
+                   this.meteostation = res.filter( i => i.ID === +route.meteostationId)[0].Name
+                }
             )
         });
     }

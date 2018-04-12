@@ -21,8 +21,8 @@ export class ConnectionService {
     meteostations: Subject<Meteostation[]>;
 
     constructor(private http: HttpClient) {
+        this.meteostations = new Subject<Meteostation[]>();
         this.setMeteostations();
-        this.meteostations = new Subject<Meteostation[]>()
     }
 
     public getMeteostationsList(param: string): Observable<Meteostation[]>

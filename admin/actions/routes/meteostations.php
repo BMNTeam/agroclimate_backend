@@ -11,5 +11,5 @@ require_once('../../../include/DB_itit.php');
 $meteostations = new Meteostations($db);
 
 if (isset($_GET['all'])) {
-    print json_encode( $meteostations->get('all') );
+    print json_encode( $meteostations->get('all'), JSON_UNESCAPED_UNICODE );
 }

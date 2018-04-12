@@ -343,7 +343,7 @@ $MonthsTitles[11] = "Декабрь";
                                             }
 
                                             //создание диаграммы
-                                            require_once('./admin/charts/index.php');
+                                            require_once('./admin/actions/charts/index.php');
                                             CreateWalterChart($Link, $meteo_id, $meteo_period, 0);
 
                                             //выборка данных всех метеостанций
