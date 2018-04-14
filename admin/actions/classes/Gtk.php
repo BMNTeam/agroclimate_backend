@@ -11,6 +11,7 @@ class Gtk
     private $db;
     private $table_name = 'ClimateData_GTK';
     private $helpers;
+    private $minimal_temperature = 10;
 
     function __construct($db)
     {
@@ -56,6 +57,16 @@ class Gtk
         }
 
         /**
+         * @param $string | string to find month number using Precipitations
+         * @return string | boolean months number or false if nothing found
+         */
+        function get_month_number($string)
+        {
+            if (preg_match('/P(\d+)_.+/', $string, $month_number)) return $month_number[1];
+            return false;
+        }
+
+        /**
          * @param $month array of T and P separated by months |
          *        [ [P4_1 => 10 .. T4_3 = 22] ]
          * @param $year
@@ -66,8 +77,8 @@ class Gtk
             $days_in_months = null;
             foreach ($month as $key => $value) {
                 //Find number in given key | P1_3 find 1 => P('1')_3
-                if (preg_match('/P(\d+)_.+/', $key, $month_number)) {
-                    $month_number = (int)trim($month_number[1]);
+                if ($month_number = get_month_number($key)) {
+                    $month_number = (int)trim($month_number);
                     $days_in_months = cal_days_in_month(CAL_GREGORIAN, $month_number, $year);
                     break;
                 }
@@ -114,12 +125,61 @@ class Gtk
 
         $permitted_months = filter_months($post);
 
-        $permitted_months = separate_by_decades($permitted_months);
+        $permitted_months = separate_by_decades($permitted_months, 2018);
 
-        print_r($permitted_months);
+
+        //TODO: fix issues with getting value from accessing property
+
+        function calculate_gtk($permitted_months, $temperature)
+        {
+            $gtk_data = [];
+            foreach ($permitted_months as $index => $months) { // Foreach month
+                $all_filled = true;
+
+                $month_n = null;
+
+                $days = null;
+                $temperature_sum = null;
+                $precipitations_sum = null;
+
+                foreach ($months as $decade_index => $decade) { //Foreach decade in month
+
+                    foreach ($decade as $key => $value) {
+                        if (get_month_number($key)) $month_n = get_month_number($key); //Set month number
+
+                        if ($value === 'NULL') {$all_filled = false; continue;} //Check that all three decades filled
+
+                        //Exit if temperature less than minimal value
+                        if (strpos($key, 'T') !== false) if ($value < $temperature) break;
+
+                        //Prepare multiplication temperature to days for numerator in formula
+                        if (strpos($key, 'T') !== false) $temperature_sum += $value * $decade['days'];
+                        if (strpos($key, 'P') !== false) $precipitations_sum += $value; //Sum precipitations
+                        if (strpos($key, 'days') !== false) $days += $value; //Sum days
+                    }
+                }
+
+                $temperature_ave = round($temperature_sum / $days, 2); //Count average
+
+                //If one of the decades not filled make all month's values NULL
+                if (!$all_filled) {$days = 'NULL'; $temperature_ave = 'NULL'; $precipitations_sum = 'NULL';}
+
+
+                array_push($gtk_data,
+                    ["P$month_n" => $precipitations_sum, "T$month_n" => $temperature_ave, "D$month_n" => $days]);
+
+            }
+
+            return $gtk_data;
+        }
+
+        $gtk_arr = calculate_gtk($permitted_months, $this->minimal_temperature);
+
+
 
 
     }
+
 
     private function insert_empty_year($year)
     {
