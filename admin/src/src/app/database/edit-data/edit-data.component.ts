@@ -53,7 +53,7 @@ export class EditDataComponent implements OnInit {
 
             this.connectionSrv.meteostations.subscribe(
                 res => this.meteostation.next(
-                    res.filter( i => i.ID === +route.meteostationId)[0].Name
+                    res.filter( i => +i.ID === +route.meteostationId)[0].Name
                 )
             );
         });
