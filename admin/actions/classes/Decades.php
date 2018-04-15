@@ -1,6 +1,6 @@
 <?php
 include('TP.php');
-include('Helpers.php');
+include_once('Helpers.php');
 
 class Decades {
     private $table_name = "ClimateDataDecade_TP";
@@ -54,6 +54,7 @@ class Decades {
             return rtrim($update, ',');
         }
         $set_sting = prepare_insert($post, $columns_arr);
+        $this->helpers->clear_from_null($set_sting);
         $query = "UPDATE $this->table_name " .
                  "SET $set_sting " .
                  "WHERE Year = $year AND MeteostationID = $meteostation_id";

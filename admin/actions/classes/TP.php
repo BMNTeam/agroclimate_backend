@@ -1,12 +1,15 @@
 <?php
+include_once('Helpers.php');
 
 class TP {
     private $table = 'ClimateData_TP';
     private $db;
+    private $helpers;
 
     public function __construct($db)
     {
         $this->db = $db;
+        $this->helpers = new Helpers();
     }
     public function get($sql)
     {
@@ -39,7 +42,7 @@ class TP {
             }
             return rtrim($update, ',');
         }
-        $update = generate_update($post);
+        $update = $this->helpers->clear_from_null(generate_update($post));
 
         $query = "UPDATE $this->table
                     SET $update

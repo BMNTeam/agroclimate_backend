@@ -41,4 +41,19 @@ class Helpers {
         }
         return $values_str;
     }
+
+    /**
+     * @param $update_str string of set parameters| ex: 'T1_1 = 3, P1_1 = NULL'
+     * @return string without NULL values
+     */
+    public function clear_from_null($update_str){
+        $str = null;
+        $update_arr = explode(',', $update_str);
+        foreach ($update_arr as $value)
+        {
+            if(strpos($value, 'NULL') !== false) continue;
+            $str .= "$value,";
+        }
+        return rtrim($str, ',');
+    }
 }

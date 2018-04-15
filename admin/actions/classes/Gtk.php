@@ -27,8 +27,9 @@ class Gtk
     public function set($gtk_str, $year, $meteostation_id)
     {
         if (!$this->year_exists($year)) $this->insert_empty_year($year);
+
         $query = "UPDATE $this->table_name
-                  SET $gtk_str
+                  SET $this->helpers->clear_from_null($gtk_str)
                   WHERE Year=$year AND MeteostationID=$meteostation_id";
 
         $this->db->prepare($query)->execute();
