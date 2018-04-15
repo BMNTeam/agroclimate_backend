@@ -1,6 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {ConnectionService, DecadesGetParams} from "../connection.service";
+import {Observer} from "rxjs/Observer";
+import {Observable} from "rxjs/Observable";
+import {Subscriber} from "rxjs/Subscriber";
+import {Subscription} from "rxjs/Subscription";
+import {Subject} from "rxjs/Subject";
 
 
 
@@ -19,7 +24,7 @@ export interface EditRequest {
 export class EditDataComponent implements OnInit {
     request: EditRequest;
     year: number;
-    meteostation: string;
+    meteostation: Subject<string> = new Subject<string>();
 
     months: string[];
 
@@ -27,9 +32,7 @@ export class EditDataComponent implements OnInit {
                 private route: ActivatedRoute,
                 private connectionSrv: ConnectionService
                 )
-    {
-
-    }
+    { }
 
     ngOnInit()
     {
@@ -47,12 +50,12 @@ export class EditDataComponent implements OnInit {
             };
 
             this.year = route.yearStart;
-            this.connectionSrv.meteostations
-                .subscribe(res => {
-                   if (!res.filter( i => i.ID === +route.meteostationId)[0] ) return;
-                   this.meteostation = res.filter( i => i.ID === +route.meteostationId)[0].Name
-                }
-            )
+
+            this.connectionSrv.meteostations.subscribe(
+                res => this.meteostation.next(
+                    res.filter( i => i.ID === +route.meteostationId)[0].Name
+                )
+            );
         });
     }
 

@@ -1,6 +1,6 @@
 <div class="col-md-12">
     <a (click)="back()">←назад</a> | <a (click)="home()"><i class="fa fa-home"></i> главная</a>
-    <h1>{{ meteostation }} | {{ year}}</h1>
+    <h1>{{ meteostation | async }} | {{ year}}</h1>
 </div>
 
 <div (keydown.enter)="submit()">
