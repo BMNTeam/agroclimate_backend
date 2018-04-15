@@ -24,17 +24,26 @@ class Gtk
 
     }
 
-    public function set($post)
+    public function set($gtk_str, $year, $meteostation_id)
     {
-        $year = $post['startYear'];
         if (!$this->year_exists($year)) $this->insert_empty_year($year);
+        $query = "UPDATE $this->table_name
+                  SET $gtk_str
+                  WHERE Year=$year AND MeteostationID=$meteostation_id";
+
+        $this->db->prepare($query)->execute();
 
 
     }
 
+    /**
+     * @param $post array of data to analyze | ex: [Year=2018, MeteostationID = 5, ...]
+     * @return void  set values to database using $this->set() function
+     */
     public function count_gtk($post)
     {
-        $year = $post['startYear'];
+        $year = $post['Year'];
+        $meteostation_id = $post['MeteostationID'];
         /**
          * Get months from April to October
          * @param $post | [
@@ -125,11 +134,14 @@ class Gtk
 
         $permitted_months = filter_months($post);
 
-        $permitted_months = separate_by_decades($permitted_months, 2018);
+        $permitted_months = separate_by_decades($permitted_months, $year);
 
 
-        //TODO: fix issues with getting value from accessing property
-
+        /**
+         * @param $permitted_months array of months from April till October
+         * @param $temperature minimal temperature to calculate GTK
+         * @return array of precipitations, temperature and days
+         */
         function calculate_gtk($permitted_months, $temperature)
         {
             $gtk_data = [];
@@ -159,7 +171,7 @@ class Gtk
                     }
                 }
 
-                $temperature_ave = round($temperature_sum / $days, 2); //Count average
+                $temperature_ave = round($temperature_sum / $days, 1); //Count average
 
                 //If one of the decades not filled make all month's values NULL
                 if (!$all_filled) {$days = 'NULL'; $temperature_ave = 'NULL'; $precipitations_sum = 'NULL';}
@@ -175,8 +187,25 @@ class Gtk
 
         $gtk_arr = calculate_gtk($permitted_months, $this->minimal_temperature);
 
+        /**
+         * @param $gtk_arr array of the separated by months
+         * @return string concatenated string of temperatures, precipitations, days
+         */
+        function gtk_to_string($gtk_arr)
+        {
+            $str = null;
+            foreach ($gtk_arr as $key => $month)
+            {
+                foreach ($month as $key => $value)
+                {
+                    $str .= "$key=$value,";
+                }
+            }
+            return rtrim($str, ',');
+        }
 
-
+        $gtk_str =  gtk_to_string($gtk_arr);
+        $this->set($gtk_str, $year, $meteostation_id);
 
     }
 

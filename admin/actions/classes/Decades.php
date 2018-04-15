@@ -19,7 +19,9 @@ class Decades {
 
     public function get($meteostation_id, $year)
     {
+
         if(!$meteostation_id || !$year) return;
+        if(! $this->is_already_exist($year)) $this->insert_empty_year($year);
 
         $sql = "SELECT * FROM $this->table_name WHERE MeteostationID = $meteostation_id AND  Year = $year";
 

@@ -31,5 +31,3 @@ if($_POST) {
         return;
     }
 }
-$gtk = new Gtk($db);
-$gtk->set($_POST);
