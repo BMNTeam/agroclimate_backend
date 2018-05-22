@@ -12,6 +12,7 @@ import {FormsModule} from "@angular/forms";
 import { ShowDataComponent } from './database/show-data/show-data.component';
 import {RouterModule, Routes} from "@angular/router";
 import { EditDataComponent } from './database/edit-data/edit-data.component';
+import { SettingsComponent } from './settings/settings/settings.component';
 
 
 const appRoutes: Routes = [
@@ -30,7 +31,8 @@ const appRoutes: Routes = [
       MainComponent,
     SelectDataComponent,
     ShowDataComponent,
-    EditDataComponent
+    EditDataComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
