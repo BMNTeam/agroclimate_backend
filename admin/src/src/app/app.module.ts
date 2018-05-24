@@ -20,7 +20,8 @@ const appRoutes: Routes = [
     {path: 'show/:meteostationId/:yearStart/:yearEnd', component: ShowDataComponent},
     {path: '',component: SelectDataComponent    },
     {path: ':meteostationId/:yearStart',component: SelectDataComponent    },
-    {path: 'edit/:meteostationId/:yearStart', component: EditDataComponent}
+    {path: 'edit/:meteostationId/:yearStart', component: EditDataComponent},
+    {path: 'settings', component: SettingsComponent}
 ]
 
 @NgModule({

@@ -6,6 +6,7 @@ class Settings {
     private $db;
     public $maintenance;
 
+
     public function __construct($db)
     {
         $this->db = $db;
@@ -16,13 +17,14 @@ class Settings {
         $sql = "SELECT * FROM $this->table";
         $settings = $this->db->query($sql);
 
-        $this->maintenance = $settings->fetchAll(PDO::FETCH_ASSOC)[0]['Maintenance'];
+        $res = $settings->fetchAll(PDO::FETCH_ASSOC)[0];
+        $this->maintenance = $res['Maintenance'];
 
     }
 
     public function save() {
         $sql = "UPDATE $this->table
-                    SET Maintenance=$this->maintenance";
+                    SET Maintenance = $this->maintenance";
         $this->db->prepare($sql)->execute();
     }
 }
