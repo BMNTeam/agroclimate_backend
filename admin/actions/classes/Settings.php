@@ -2,7 +2,7 @@
 include_once('Helpers.php');
 
 class Settings {
-    private $table = 'ClimateData_Settings';
+    private $table = 'ClimateData_administration';
     private $db;
     public $maintenance;
 
@@ -18,13 +18,13 @@ class Settings {
         $settings = $this->db->query($sql);
 
         $res = $settings->fetchAll(PDO::FETCH_ASSOC)[0];
-        $this->maintenance = $res['Maintenance'];
+        $this->maintenance = $res['maintenance'];
 
     }
 
     public function save() {
         $sql = "UPDATE $this->table
-                    SET Maintenance = $this->maintenance";
+                    SET maintenance = $this->maintenance";
         $this->db->prepare($sql)->execute();
     }
 }
