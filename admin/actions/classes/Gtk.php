@@ -28,11 +28,13 @@ class Gtk
     {
         if (!$this->year_exists($year)) $this->insert_empty_year($year);
         $values = $this->helpers->clear_from_null($gtk_str);
-        $query = "UPDATE $this->table_name
+        if($values) {
+            $query = "UPDATE $this->table_name
                   SET $values
                   WHERE Year=$year AND MeteostationID=$meteostation_id";
+            $this->db->prepare($query)->execute();
+        }
 
-        $this->db->prepare($query)->execute();
 
 
     }
