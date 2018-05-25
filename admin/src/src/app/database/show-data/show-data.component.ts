@@ -146,7 +146,7 @@ export class ShowDataComponent implements OnInit {
         this.router.navigate(['edit', meteostationId, year]);
     }
 
-    private back(): void {
+    public back(): void {
         this.router.navigate(['', this.request.meteostationId, this.request.yearStart]);
     }
 

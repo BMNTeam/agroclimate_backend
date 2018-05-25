@@ -80,11 +80,11 @@ export class EditDataComponent implements OnInit {
         return ['Январь','Февраль', "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"]
     }
 
-    private back(): void {
+    public back(): void {
         this.router.navigate(['show', this.request.MeteostationID, this.request.Year]);
     }
 
-    private home(): void
+    public home(): void
     {
         this.router.navigate(['', this.request.MeteostationID, this.request.Year]);
     }

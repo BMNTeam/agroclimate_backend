@@ -2,6 +2,11 @@
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST');
 header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token , Authorization');
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 require_once('../../../include/DB_itit.php');
 require_once ('../classes/Settings.php');
 /**
@@ -22,7 +27,7 @@ if( isset($_GET['all']) ) {
 if( isset($_POST) ) {
     $post = json_decode(file_get_contents('php://input'), true);
     $maintenance = $post['settings']['maintenance'];
-    print_r($maintenance);
+
     $settings->maintenance = (int)$maintenance;
     $settings->save();
 

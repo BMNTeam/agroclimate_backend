@@ -1,7 +1,9 @@
 <?php
+
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST');
-//header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token , Authorization');
+header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token , Authorization');
+
 require_once('../classes/Decades.php');
 require_once('../classes/Gtk.php');
 require_once('../../../include/DB_itit.php');

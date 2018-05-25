@@ -1,5 +1,5 @@
 <?php
-require_once('../../../include/DB_itit.php');
+require_once(dirname(__FILE__).'/../../../include/DB_itit.php');
 require_once('Helpers.php');
 
 /**
@@ -27,9 +27,9 @@ class Gtk
     public function set($gtk_str, $year, $meteostation_id)
     {
         if (!$this->year_exists($year)) $this->insert_empty_year($year);
-
+        $values = $this->helpers->clear_from_null($gtk_str);
         $query = "UPDATE $this->table_name
-                  SET $this->helpers->clear_from_null($gtk_str)
+                  SET $values
                   WHERE Year=$year AND MeteostationID=$meteostation_id";
 
         $this->db->prepare($query)->execute();

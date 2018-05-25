@@ -1,4 +1,4 @@
-<form #f="ngForm" (submit)="save($event.preventDefault()); f.form.markAsPristine(); ;">
+<form #f="ngForm" (submit)="$event.preventDefault(); save(); f.form.markAsPristine(); ;">
    <div class="col-md-12" *ngIf="settings" >
        <div class="form-group">
            <label class="text-muted"> Включить режим отладки</label>
