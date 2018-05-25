@@ -2,7 +2,9 @@
 $heading = 'Система временно недоступна';
 $sub_heading = 'Повторите запрос позже';
 ?>
+<?php ?>
 <?php include_once('./include/head.php'); ?>
+
 <!--Temporary header-->
 <div class="header-page-name">
     <div class="overlay-image-layer">

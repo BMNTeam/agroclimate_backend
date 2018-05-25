@@ -33,10 +33,9 @@ if (isset($_POST['auth_name'])) {
 
 
 if (isset($_GET['action']) AND $_GET['action']=="logout") {
-    echo "session end";
     session_start();
     session_destroy();
-    header("Location: http://climate.sniish.ru/");
+    header("Location: /index.php");
     exit;
 }
 

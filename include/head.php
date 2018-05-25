@@ -1,3 +1,4 @@
+<? require_once (dirname(__FILE__) . '/settings/maintenance.php'); ?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>

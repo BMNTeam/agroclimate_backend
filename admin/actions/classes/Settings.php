@@ -1,5 +1,5 @@
 <?php
-include_once('Helpers.php');
+include (dirname(__FILE__) . "/../../../include/DB_itit.php");
 
 class Settings {
     private $table = 'ClimateData_administration';
@@ -28,3 +28,5 @@ class Settings {
         $this->db->prepare($sql)->execute();
     }
 }
+
+$settings = new Settings($db);

@@ -9,8 +9,7 @@ require_once ('../classes/Settings.php');
  * User: maksimbarsukov
  * Date: 31/03/2018
  * Time: 14:41
- */;
-$settings = new Settings($db);
+ */
 
 if( isset($_GET['all']) ) {
 
