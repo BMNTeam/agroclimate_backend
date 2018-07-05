@@ -234,7 +234,7 @@ class Decades {
     {
         $post = array();
         foreach ($datas as $key => $val){
-            (!$val)? ($post += [$key => "NULL"]) : ($post += [$key => $val]);
+            (!$val && $val !== 0)? ($post += [$key => "NULL"]) : ($post += [$key => $val]);
         }
         return $post;
     }
