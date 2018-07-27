@@ -7,6 +7,7 @@ import {Subject} from "rxjs/Subject";
 
 export interface Settings {
     maintenance: boolean;
+    maintenanceMshsk: boolean;
 }
 
 @Injectable()

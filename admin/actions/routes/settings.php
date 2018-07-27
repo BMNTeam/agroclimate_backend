@@ -26,9 +26,11 @@ if( isset($_GET['all']) ) {
 
 if( isset($_POST) ) {
     $post = json_decode(file_get_contents('php://input'), true);
-    $maintenance = $post['settings']['maintenance'];
+    $s = $post['settings'];
 
-    $settings->maintenance = (int)$maintenance;
+    $settings->maintenance = (int)$s['maintenance'];
+    $settings->maintenanceMshsk = (int)$s['maintenanceMshsk'];
+
     $settings->save();
 
 
