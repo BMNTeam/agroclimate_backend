@@ -5743,6 +5743,28 @@ h4 {
   -webkit-border-bottom-right-radius: 5px;
           border-bottom-right-radius: 5px;
   overflow: hidden; }
+  .container-elements.maintain {
+    min-height: 40vh;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    flex-basic: 100%; }
+    .container-elements.maintain i {
+      font-size: 7rem; }
   .container-elements .container-elements-element {
     margin-top: 30px;
     overflow: hidden;
@@ -6014,3 +6036,13 @@ div.content p {
 
 .special-link {
   padding-right: 40px; }
+
+.icon.dashed {
+  position: relative; }
+  .icon.dashed::before {
+    content: '';
+    height: 100%;
+    width: 5px;
+    position: absolute;
+    left: 50%;
+    top: 0; }

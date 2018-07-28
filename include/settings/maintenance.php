@@ -11,5 +11,4 @@ switch (true)
         break;
 }
 
-// TODO: finish with maintenance, copy it to the mshsk and customise
 

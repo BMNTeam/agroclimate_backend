@@ -1,4 +1,4 @@
-<?php require_once('./include/DB_itit.php');
+<?php require_once('../include/DB_itit.php');
 
 
 //Select all services
