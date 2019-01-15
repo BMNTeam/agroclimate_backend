@@ -112,7 +112,7 @@ export class EditDataComponent implements OnInit {
      */
     public validate(event: KeyboardEvent)
     {
-        if(event && event.key.match(/\d/) ||
+        if(event && event.key.match(/\d|-/) ||
             (event.key == '.' || event.keyCode == 8 || event.keyCode == 9) ) return;
         event.preventDefault();
     }
