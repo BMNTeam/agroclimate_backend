@@ -36,7 +36,7 @@ if (isset($_POST['auth_name'])) {
     /**
      * Fake OAuth
      */
-    if($_POST['auth_name'] === "sniish" && $_POST['auth_pass'] === "1sniish1")
+    if($_POST['auth_name'] === "mshsk" && $_POST['auth_pass'] === "1sniish1")
     {
         session_start();
         $_SESSION['user_id'] ="id";
