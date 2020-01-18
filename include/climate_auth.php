@@ -3,40 +3,62 @@ include_once ('./include/chart_func.php');
 
 if (isset($_POST['auth_name'])) {
 
-    $DB_Link = ConnectDB();
+    /**
+     * Original OAuth
+    */
+    /* $DB_Link = ConnectDB();
 
     $login=mysqli_real_escape_string($DB_Link, $_POST['auth_name']);
     $tmp_pass=mysqli_real_escape_string($DB_Link, $_POST['auth_pass']);
 
-
     $tmp_pass .= $login;
-    $pass = md5($tmp_pass);
+        $pass = md5($tmp_pass);
 
-    $query = "SELECT * FROM ias_users WHERE login='$login' AND pass='$pass' AND active = '1'";
-    $res = mysqli_query($DB_Link, $query) or trigger_error(mysqli_error().$query);
-    if ($row = mysqli_fetch_assoc($res)) {
+        $query = "SELECT * FROM ias_users WHERE login='$login' AND pass='$pass' AND active = '1'";
+        $res = mysqli_query($DB_Link, $query) or trigger_error(mysqli_error().$query);
+        if ($row = mysqli_fetch_assoc($res)) {
+            session_start();
+            $_SESSION['user_id'] = $row['id'];
+            $_SESSION['work_title'] = $row['work_title'];
+            $_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
+            header("Location: http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']."?".session_name().'='.session_id());
+
+        }
+        else
+        {
+            session_start();
+            $_SESSION['user_id'] = -1;
+            header("Location: http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']."");
+        }
+        */
+    // END original
+
+    /**
+     * Fake OAuth
+     */
+    if($_POST['auth_name'] === "mshsk" && $_POST['auth_pass'] === "1sniish1")
+    {
         session_start();
-        $_SESSION['user_id'] = $row['id'];
-        $_SESSION['work_title'] = $row['work_title'];
+        $_SESSION['user_id'] ="id";
+        $_SESSION['work_title'] = "work";
         $_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
         header("Location: http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']."?".session_name().'='.session_id());
     }
-    else
-    {
+    else {
         session_start();
         $_SESSION['user_id'] = -1;
         header("Location: http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']."");
     }
 
+    // end fake;
     exit;
 }
 
 
 if (isset($_GET['action']) AND $_GET['action']=="logout") {
-    echo "session end";
     session_start();
     session_destroy();
-    header("Location: http://climate.sniish.ru/");
+    header("Location: /index.php");
     exit;
 }
 
@@ -175,7 +197,7 @@ include_once('head.php'); ?>
                                                             дополнительно
                                                         </div>
                                                         <div class="hidden" id="additionalAccessLinks" >
-                                                            <a href="admin/index.php">Как администратор</a> /
+                                                            <a href="admin/view/index.html">Как администратор</a> /
                                                             <a href="manager/index.php">Как менеджер</a>
                                                         </div>
                                                     </div>

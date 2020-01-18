@@ -377,7 +377,8 @@ $Meteostations[17] = "Ставропольский край";
                                                 }
                                             }
 
-                                            require_once('./admin/charts/index.php');
+
+                                            require_once('./admin/actions/charts/index.php');
                                             createLineChartForTemperature($Legend1, $Legend2, $BaseValueTr, $AnalyzeValueTr);
                                             }?>
                                         </div>

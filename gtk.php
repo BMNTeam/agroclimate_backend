@@ -377,7 +377,7 @@ $ValueTitles = array('апрель', 'май', 'июнь', 'июль', 'авгу
                                                             }
                                                         }
 
-                                                        require_once('./admin/charts/index.php');
+                                                        require_once('./admin/actions/charts/index.php');
                                                         createSpecialColumnChart($Legend, $GTK, $SummTResultValue);
                                             }
                                             ?>

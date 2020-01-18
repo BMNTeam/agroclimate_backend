@@ -1,5 +1,6 @@
 <?php
-require_once('../include/databaseConnection.php');
+require_once('../../include/databaseConnection.php');
+require_once ('./classes/Decades.php');
 
 ?>
 <!DOCTYPE html>
@@ -34,6 +35,7 @@ require_once('../include/databaseConnection.php');
 
 </head>
 <body>
+
 <header>
 
     <div class="clearfix fixed-menu">
@@ -48,7 +50,7 @@ require_once('../include/databaseConnection.php');
                             <a href="http://www.mshsk.ru/" class="not-link-style">
                                 <div class="logo">
 
-                                    <img src="../img/mshsk.png" class="msh-image fl" alt="Логотип СНИИСХ">
+                                    <img src="../../img/mshsk.png" class="msh-image fl" alt="Логотип СНИИСХ">
                                     <div class="sniish_text msh_text fl">
                                         <p>Министерство селького</p>
                                         <p>хозяйства края</p>
@@ -60,7 +62,7 @@ require_once('../include/databaseConnection.php');
                         <figure class="clearfix fl">
                             <a href="http://sniish.ru" class="not-link-style">
                                 <div class="logo fl">
-                                    <img src="../img/sniish-logo.png" class="logo-image fl" alt="Логотип СНИИСХ">
+                                    <img src="../../img/sniish-logo.png" class="logo-image fl" alt="Логотип СНИИСХ">
                                     <div class="sniish_text fl">
                                         <p>Ставропольский</p>
                                         <p>НИИСХ</p>
@@ -156,11 +158,11 @@ require_once('../include/databaseConnection.php');
 						        echo "POST";
 					        }; ?>">
                                 <div class="col-md-6">
-                                    <h4>
+                                    <h4 class ="<? echo(($isEditable)? 'hidden' : '') ?>">
                                         Выберите метеостанцию
                                     </h4>
                                     <div class="input-group">
-                                        <select name="select" class="form-control" name="select_meteostation" id="select_meteostation">
+                                        <select name="select" class="form-control <? echo(($isEditable)? 'hidden' : '') ?>" name="select_meteostation" id="select_meteostation">
 
 									        <?php foreach ($resultMeteostations as $key => $value): ?>
 
@@ -184,8 +186,8 @@ require_once('../include/databaseConnection.php');
                                     </div>
                                 </div>
 
-                                <div class="col-md-6">
-                                    <div class="rom">
+                                <div class="col-md-6 <? echo(($isEditable) ? 'hidden' : '') ?>">
+                                    <div class="row">
                                         <div class="col-md-6">
                                             <h4>
                                                 Год - начало
@@ -294,10 +296,10 @@ require_once('../include/databaseConnection.php');
 </footer>
 
 
-<link rel="stylesheet" href="../css/libs.css">
-<link rel="stylesheet" href="../css/main.min.css">
-<script src="../js/scripts.min.js"></script>
-<script src="../js/common.min.js"></script>
+<link rel="stylesheet" href="../../css/libs.css">
+<link rel="stylesheet" href="../../css/main.min.css">
+<script src="../../js/scripts.min.js"></script>
+<script src="../../js/common.min.js"></script>
 
 </body>
 </html>

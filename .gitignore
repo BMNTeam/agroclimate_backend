@@ -1,0 +1,13 @@
+# Created by .ignore support plugin (hsz.mobi)
+.DS_Store
+.htaccess
+.idea/
+admin/.htaccess
+admin/.htpasswd
+cgi-bin/
+include/DB_itit.php
+manager/.htaccess
+manager/.htpasswd
+mshsk/include/DB_itit.php
+mshsk/manager/.htaccess
+mshsk/manager/.htpasswd

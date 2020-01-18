@@ -278,7 +278,7 @@ $Meteostations[17] = "Ставропольский край";
                                                 }
                                             }
 
-                                            require_once('./admin/charts/index.php');
+                                            require_once('./admin/actions/charts/index.php');
                                             createLineChartWithDoubleY($Legend1, $ValueTTr, $ValuePTr, $chart_num);
 
 

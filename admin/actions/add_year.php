@@ -1,6 +1,6 @@
 <?php
 
-require_once('../include/DB_itit.php');
+require_once('../../include/DB_itit.php');
 
 /** Variables */
 $insert_values = '';
@@ -24,7 +24,7 @@ function get_last_year ($db) {
 
 //Get last year and increase it by 1
 $last_year = get_last_year($db);
-$year = $last_year + 1;
+$year = (integer) $last_year + 1;
 
 
 /** Create Insert Query */

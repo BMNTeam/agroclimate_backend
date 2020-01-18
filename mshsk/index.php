@@ -1,4 +1,4 @@
-<?php require_once('./include/DB_itit.php');
+<?php require_once('../include/DB_itit.php');
 
 
 //Select all services
@@ -30,7 +30,7 @@ $heading = 'Главное меню ИАС Агро-климат';
 $sub_heading = 'В системе хранятся данные за период с 1961г. по настоящее время';
 
 //Вложение вспомогательных файлов
-//include_once ('./include/climate_auth.php');
+include_once ('./include/climate_auth.php');
 include_once ('./include/header.php');
 ?>
 

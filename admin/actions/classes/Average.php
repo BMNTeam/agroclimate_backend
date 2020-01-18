@@ -1,6 +1,5 @@
 <?php
-require_once($INCLUDE_ROOT .'/DB_itit.php');
-
+require_once('../../../include/DB_itit.php');
 /**
  *
  *
@@ -96,6 +95,7 @@ class Average{
         if (!empty($this->end_year)) {
             for ($j = $this->start_year; $j <= $this->end_year; $j++) {
                 for ($i = 1; $i <= 12; $i++) {
+                    if($months_sum[$j]["P$i"] == 0) continue; //Don't calculate for empty values
                     $months_average[$j]["T$i"] = round($months_sum[$j]["T$i"] / ($this->number_of_meteostations), $this->round_to);
                     $months_average[$j]["P$i"] = round($months_sum[$j]["P$i"] / ($this->number_of_meteostations), $this->round_to);
                     $months_average[$j]["Year"] = $j;
@@ -104,6 +104,7 @@ class Average{
         } else //If we have only one Year given
         {
             for ($i = 1; $i <= 12; $i++) {
+                if($months_sum[$this->start_year]["P$i"] == 0) continue; //Don't calculate for empty values
                 $months_average[$this->start_year]["T$i"] = round($months_sum[$this->start_year]["T$i"] / ($this->number_of_meteostations), $this->round_to);
                 $months_average[$this->start_year]["P$i"] = round($months_sum[$this->start_year]["P$i"] / ($this->number_of_meteostations), $this->round_to);
                 $months_average[$this->start_year]["Year"] = $this->start_year;
