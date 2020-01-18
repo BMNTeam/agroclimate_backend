@@ -163,8 +163,6 @@ $MonthsTitles[11] = "Декабрь";
 
                                             <?php
 
-                                            $Link = ConnectDB();
-
                                             //определение года последнего хранящегося в базе данных
                                             $sql = "select * from ClimateData_TP ORDER BY Year DESC";
                                             $LastYear_QR = mysqli_query($Link, $sql);

@@ -224,11 +224,13 @@ $ValueTitles = array('апрель', 'май', 'июнь', 'июль', 'авгу
                                                         $CurValue = $row[$Index];
                                                         $CurValue = round($CurValue, 1);
                                                         $ValuesT[$j][$i] = $CurValue;
+                                                        
                                                     }
                                                     $j++;
                                                 }
 
                                                 //осадки
+                                                $tmp_p = array();
                                                 $j = 0;
                                                 $query_result = mysqli_query($Link, $sql);
                                                 while ($row = $query_result->fetch_assoc())
@@ -297,8 +299,10 @@ $ValueTitles = array('апрель', 'май', 'июнь', 'июль', 'авгу
                                                 $ValueP_7_10 = array();
                                                 $ValueT_4_10 = array();
                                                 $ValueP_4_10 = array();
+                                                
                                                 for ($i = 0; $i < $RowsCount; $i++)
                                                 {
+                                                   
                                                     for ($j = 0; $j < 7; $j++)
                                                     {
                                                         if ($ValuesT[$i][$j] > 0.0 && $ValuesT[$i][$j] != "NULL")
@@ -313,6 +317,7 @@ $ValueTitles = array('апрель', 'май', 'июнь', 'июль', 'авгу
                                                                 $ValueP_7_10[$i] += $ValuesP[$i][$j];
                                                             }
                                                         }
+                                                        
                                                     }
                                                 }
 
@@ -321,11 +326,14 @@ $ValueTitles = array('апрель', 'май', 'июнь', 'июль', 'авгу
                                                     $ValueT_4_10[$i] = $ValueT_4_6[$i] + $ValueT_7_10[$i];
                                                     $ValueP_4_10[$i] = $ValueP_4_6[$i] + $ValueP_7_10[$i];
                                                 }
+                                                
+                                               
 
                                                 for ($i = 0; $i < $RowsCount; $i++)
                                                 {
                                                     if ($ValueT_4_6[$i] > 0)
                                                     {
+                                                        
                                                         $GTK[7] += ($ValueP_4_6[$i]) / (0.1 * ($ValueT_4_6[$i]));
                                                     } else
                                                         {
@@ -343,6 +351,7 @@ $ValueTitles = array('апрель', 'май', 'июнь', 'июль', 'авгу
 
                                                     if ($ValueT_4_10[$i] > 0)
                                                     {
+                                                        
                                                         $GTK[9] += ($ValueP_4_10[$i]) / (0.1 * ($ValueT_4_10[$i]));
                                                     } else
                                                         {

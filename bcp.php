@@ -127,9 +127,9 @@ $Meteostations[16] = "Ставрополь";
                                                 {
                                                     if($meteo_id < 17)
                                                     {
-                                                        $sql_TP = "select * from ClimateData_TP where MeteostationID = \"$meteo_id\" AND Year > \"1985\" AND Year < \"2017\" ORDER BY YEAR ASC";
-                                                        $sql_GTK = "select * from ClimateData_GTK where MeteostationID = \"$meteo_id\" AND Year > \"1985\" AND Year < \"2017\" ORDER BY YEAR ASC";
-                                                        $sql_MD = "select * from ClimateData_MoistureDeficit where MeteostationID = \"$meteo_id\" AND Year > \"1985\" AND Year < \"2017\" ORDER BY YEAR ASC";
+                                                        $sql_TP = "select * from ClimateData_TP where MeteostationID = \"$meteo_id\" AND Year > \"1985\" ORDER BY YEAR ASC";
+                                                        $sql_GTK = "select * from ClimateData_GTK where MeteostationID = \"$meteo_id\" AND Year > \"1985\" ORDER BY YEAR ASC";
+                                                        $sql_MD = "select * from ClimateData_MoistureDeficit where MeteostationID = \"$meteo_id\" AND Year > \"1985\" ORDER BY YEAR ASC";
                                                     }
                                                     //else if($meteo_id == 17)
                                                     //{

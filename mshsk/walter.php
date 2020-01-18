@@ -101,7 +101,6 @@ $Meteostations[17] = "Ставропольский край";
 											<?php
 
                                             $OneYear = false;
-                                            $Link = ConnectDB();
 
                                             //определение года последнего хранящегося в базе данных
                                             $sql = "select * from ClimateData_TP ORDER BY Year DESC";

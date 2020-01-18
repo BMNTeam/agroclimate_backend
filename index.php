@@ -9,7 +9,7 @@ $servicesVisibility = ($selectServices->fetchAll(PDO::FETCH_ASSOC));
 function isVisibleBlock($servicesVisibility, $start, $end){
     $is_visible = false;
 	for($i = $start; $i < $end; $i++ ) {
-		if( ! $servicesVisibility[$i][visible] == 0){
+		if( ! $servicesVisibility[$i]['visible'] == 0){
 			$is_visible = true;
 			return $is_visible;
 		}

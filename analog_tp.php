@@ -5,7 +5,6 @@ $heading = 'Поиск годов аналогов по тепло- и влаг�
 $sub_heading = 'Анализ проводится за период 1961г. по настоящее время';
 
 //Вложение вспомогательных файлов
-include_once ('./include/climate_auth.php');
 include_once ('./include/header.php');
 include_once ('./include/chart_func.php');
 include_once ('./include/stats_func.php');

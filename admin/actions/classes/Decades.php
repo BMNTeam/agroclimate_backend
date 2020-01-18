@@ -86,12 +86,7 @@ class Decades {
                 for($d=1; $d<=3; $d++)
                 {
                     $param_str = "$param$m".'_'."$d"; // Ex: T1_1
-                    // If value equal to Null not "0" or "" then break
-                    if($post[$param_str] == 'NULL' && $post[$param_str] !== 0)
-                    {
-                        $sum = null;
-                        continue;
-                    };
+                    if($post[$param_str] == 'NULL'){ $sum = null; continue;};
                     $sum += $post[$param_str];
                 }
                 $average = $sum/3; //3 decades

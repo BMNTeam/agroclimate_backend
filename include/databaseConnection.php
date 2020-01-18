@@ -5,14 +5,14 @@
  * Date: 17.01.2017
  * Time: 13:09
  */
-//TODO: fix view after saving decades data and getting another information
+
 // Include directory path
 $INCLUDE_ROOT = dirname(__FILE__);
 
 //require_once('DB_itit.php');
-require_once($INCLUDE_ROOT . '/../admin/actions/classes/Average.php');
-require_once ($INCLUDE_ROOT.'/../admin/actions/classes/Decades.php');
-require_once ($INCLUDE_ROOT.'/../admin/actions/classes/TP.php');
+require_once($INCLUDE_ROOT.'/../admin/classes/average.php');
+require_once ($INCLUDE_ROOT.'/../admin/classes/Decades.php');
+require_once ($INCLUDE_ROOT.'/../admin/classes/TP.php');
 
 
 //On form loading query ---- maybe it's just for test purposes)))
@@ -47,24 +47,21 @@ $year_to_edit = $_GET['year_to_edit'];
 function getDataFromDatabase ( $db, $isEditable, $selectRegion, $selectStartYear, $selectEndYear, $year_to_edit  ){
     $selectString = '';
 
-    if( $selectEndYear == '' && ! $isEditable) // Just get year to edit
+    if( $selectEndYear == '' && ! $isEditable)
     {
         $selectString = "SELECT * FROM ClimateData_TP WHERE MeteostationID=? AND Year = ?";
     }
-    elseif($selectEndYear != '' && ! $isEditable) // If selected 2 year catch both
+    elseif($selectEndYear != '' && ! $isEditable)
     {
         $selectString = "SELECT * FROM ClimateData_TP WHERE MeteostationID=? AND Year BETWEEN ? AND ?";
     }
     elseif( ! empty( $year_to_edit ) && $isEditable )
     {
         $selectString = "SELECT * FROM ClimateData_TP WHERE MeteostationID=? AND Year = ?";
-
-    }elseif( empty( $year_to_edit) ) {/*always in the end*/
+    } elseif( empty( $year_to_edit) ) {/*always in the end*/
 
         $selectString = "SELECT * FROM ClimateData_TP WHERE MeteostationID=? AND Year = ?";
     }
-
-
 
 //Prepare query
     $dataToAnalyse = $db-> prepare( $selectString );
@@ -80,9 +77,9 @@ function getDataFromDatabase ( $db, $isEditable, $selectRegion, $selectStartYear
     }
     $dataToAnalyse->bindValue(3, $selectEndYear, PDO::PARAM_INT);
 
-
 //Execute query
     $dataToAnalyse->execute();
+
 //Get results al associative array
     return $resultDataToAnalyse = $dataToAnalyse->fetchAll(PDO::FETCH_ASSOC);
 }
@@ -103,6 +100,10 @@ if(!empty($_POST) && empty($_POST['T1_1']) ){
 $tp = new TP($db);
 $tp->set($_POST);
 
+
+
+
+
 //Get results al associative array
 $postRegion = $_POST['MeteostationID'];
 $postYear = $_POST['year_to_edit'];
@@ -112,19 +113,10 @@ $resultDataToAnalyse = getDataFromDatabase( $db, $isEditable, $postRegion, $post
 
 
 
-} elseif (!empty($_POST) && !empty($_POST['T1_1']) ) // POST with decades
+} elseif (!empty($_POST) && !empty($_POST['T1_1']) )
 {
     $decades = new Decades($db);
     $decades->set($_POST);
-
-    //Get results al associative array
-    $postRegion = $_POST['select'];
-    $postYear = $_POST['year_to_edit'];
-
-    //$year_to_edit = null;
-
-//Show changed data
-    $resultDataToAnalyse = getDataFromDatabase( $db, $isEditable, $postRegion, $postYear, $selectEndYear, $postYear);
 }
 
 /**

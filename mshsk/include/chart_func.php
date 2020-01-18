@@ -297,29 +297,4 @@ function CreateInteractiveBarChartExtended($a_DivID, $a_Width, $a_Height, $a_Tit
     echo "</script>\n";
 
 }
-
-
-
-//Функция соединения с базой данных
-function ConnectDB()
-{
-    global $mysqlhost, $mysqllogin, $mysqlpassword, $mysqldatabase;
-    //Подключение к базе
-    $Link = mysqli_connect($mysqlhost, $mysqllogin, $mysqlpassword) or die("Ошибка! Невозможно подключится к базе данных!");
-
-    mysqli_select_db($Link, $mysqldatabase) or die("Ошибка! Невозможно выбрать базу данных.");
-
-    return $Link;
-}//function ConnectDB()
-
-//функция завершения работы с базой
-function DisconnectDB()
-{
-    if(mysqli_close() === false)
-    {
-        die ("Ошибка! Невозможно завершить сеанс работы с базой данных.");
-    }
-
-}//function DisconnectDB()
-
 ?>
