@@ -8,9 +8,9 @@
  * @return void
  *
  */
-function createLineChartWithDoubleY ( $first_region, $arr1, $arr2, $chart_num)
+function createLineChartWithDoubleY ( $first_region, $arr1, $arr2, $chart_num, $isAgro)
 {
-    global $months;
+    $months = getMonthsTitles($isAgro);
 
     // Annotations work only on previous version of Google Charts !!!
 

@@ -8,6 +8,7 @@ $sub_heading = 'Анализ проводится за период 1961г. по
 include_once ('./include/header.php');
 include_once ('./include/chart_func.php');
 include_once ('./include/stats_func.php');
+include_once ('./admin/actions/charts/app/helper-functions.php');
 
 extract($_POST);
 
@@ -31,19 +32,7 @@ $Meteostations[15] = "Светлоград";
 $Meteostations[16] = "Ставрополь";
 $Meteostations[17] = "Ставропольский край";
 
-$MothsTitles = array();
-$MonthsTitles[0] = "Январь";
-$MonthsTitles[1] = "Февраль";
-$MonthsTitles[2] = "Март";
-$MonthsTitles[3] = "Апрель";
-$MonthsTitles[4] = "Май";
-$MonthsTitles[5] = "Июнь";
-$MonthsTitles[6] = "Июль";
-$MonthsTitles[7] = "Август";
-$MonthsTitles[8] = "Сентябрь";
-$MonthsTitles[9] = "Октябрь";
-$MonthsTitles[10] = "Ноябрь";
-$MonthsTitles[11] = "Декабрь";
+$MonthsTitles = getMonthsTitles(!!$_POST['agro_year']);
 
 ?>
 <section class="warning-copyright">
@@ -171,11 +160,11 @@ $MonthsTitles[11] = "Декабрь";
                                                         <?
                                                         if(isset($agro_year) && $agro_year == 1)
                                                         {
-                                                            echo "<td align=\"center\"><input type=\"checkbox\" name=\"agro_year\" value=\"1\" checked></td>";
+                                                            echo "<td align=\"center\"><input type=\"checkbox\" class='toggle-agrarian-year' name=\"agro_year\" value=\"1\" checked></td>";
                                                         }
                                                         else
                                                         {
-                                                            echo "<td align=\"center\"><input type=\"checkbox\" name=\"agro_year\" value=\"1\"></td>";
+                                                            echo "<td align=\"center\"><input type=\"checkbox\"  class='toggle-agrarian-year' name=\"agro_year\" value=\"1\"></td>";
                                                         }?>
 
                                                     </tr>
@@ -854,7 +843,7 @@ function CreateWalterChart($Link, $MeteoID, $MeteoPeriod, $chart_num, $sub_title
     }
 
     require_once('./admin/actions/charts/index.php');
-    createLineChartWithDoubleY($Legend1, $ValueTTr, $ValuePTr, $chart_num);
+    createLineChartWithDoubleY($Legend1, $ValueTTr, $ValuePTr, $chart_num, !!$a_AgroYear);
 }
 
 ?>

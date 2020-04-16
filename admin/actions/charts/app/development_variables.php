@@ -1,22 +1,9 @@
 <?php
+require_once("helper-functions.php");
 // Only for development process to make sure that code renders as JS
 $production = true;
 
-$months = array(
-    'Январь',
-    'Февраль',
-    "Март",
-    "Апрель",
-    "Май",
-    "Июнь",
-    "Июль",
-    "Август",
-    "Сентябрь",
-    "Октябрь",
-    "Ноябрь",
-    "Декабрь"
-);
-
+$months = getMonthsTitles(false);
 
 $additional_months_array = array(
     "Апрель",
