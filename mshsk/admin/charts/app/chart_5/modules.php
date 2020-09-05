@@ -8,7 +8,7 @@
  * @return void
  *
  */
-function createLineChartWithDoubleY ( $first_region, $arr1, $arr2, $chart_num)
+function createLineChartWithDoubleY ( $first_region, $arr1, $arr2)
 {
     global $months;
 

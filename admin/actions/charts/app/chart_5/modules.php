@@ -2,13 +2,12 @@
 /**
  * Create Column Chart diagram
  * @param $first_region array
- * @param $second_region array
  * @param $arr1 array first years values
  * @param $arr2 array second years values
+ * @param bool $isAgro
  * @return void
- *
  */
-function createLineChartWithDoubleY ( $first_region, $arr1, $arr2, $chart_num, $isAgro)
+function createLineChartWithDoubleY ( $first_region, $arr1, $arr2, $isAgro = false)
 {
     $months = getMonthsTitles($isAgro);
 
