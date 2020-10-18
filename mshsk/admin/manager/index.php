@@ -1,18 +1,12 @@
 <?php
-
-require_once( './../include/DB_itit.php' );
+ini_set('display_errors', 1);
+error_reporting(E_ALL ^ E_NOTICE);
+require_once('./../../include/DB_itit.php');
 
 
 //Select all services
 $selectServices = $db->query("SELECT * FROM ClimateData_administration");
 $servicesVisibility = ($selectServices->fetchAll(PDO::FETCH_ASSOC));
-
-
-//Check if user came from admin folder
-$referer = $_SERVER['HTTP_REFERER'];
-$pattern = '/.*admin.*/';
-$is_admin = preg_match($pattern, $referer);
-
 
 ?>
 <html lang="ru">
@@ -49,7 +43,7 @@ $is_admin = preg_match($pattern, $referer);
 
 <body>
 	<header>
-        <form action="../include/services_administration.php" method="POST" name="saveServicesVisibility" id="saveServicesVisibility">
+        <form action="./../../include/services_administration.php" method="POST" name="saveServicesVisibility" id="saveServicesVisibility">
 		<div class="clearfix fixed-menu">
 				<div class="container">
 					<div class="col-md-12">
@@ -62,7 +56,7 @@ $is_admin = preg_match($pattern, $referer);
 									<a href="http://www.mshsk.ru/" class="not-link-style">
 										<div class="logo">
 
-											<img src="../img/mshsk.png" class="msh-image fl" alt="Логотип СНИИСХ">
+											<img src="./../../img/mshsk.png" class="msh-image fl" alt="Логотип СНИИСХ">
 											<div class="sniish_text msh_text fl">
 												<p>Министерство селького</p>
 												<p>хозяйства края</p>
@@ -74,7 +68,7 @@ $is_admin = preg_match($pattern, $referer);
 								<figure class="clearfix fl">
 									<a href="http://sniish.ru" class="not-link-style">
 										<div class="logo fl">
-											<img src="../img/sniish-logo.png" class="logo-image fl" alt="Логотип СНИИСХ">
+											<img src="./../../img/sniish-logo.png" class="logo-image fl" alt="Логотип СНИИСХ">
 											<div class="sniish_text fl">
 												<p>Ставропольский</p>
 												<p>НИИСХ</p>
@@ -89,8 +83,8 @@ $is_admin = preg_match($pattern, $referer);
 
 							<div class="header-right fr">
 								<menu class="main-menu">
-									<?php echo(($is_admin)?'<li><a href="../admin/index.php" class="special-link">Редактировать базу</a></li>': ''); ?>
-									<li><a href="../index.php">Меню</a></li>
+									<li><a href="../index.php" class="special-link">Редактировать базу</a></li>
+									<li><a href="../../index.php">Меню</a></li>
                                     <input type="submit" value="Сохранить" class="btn btn-success save-visibility--button" id="saveVisibilityStateButton">
                                     <div class="notification-message" id="notificationMessage">
                                         <p>Информация успешно обновлена</p>
@@ -155,7 +149,7 @@ $is_admin = preg_match($pattern, $referer);
 										<a href="#">
 
 											<div class="service-icon economics-icon-hover">
-												<img src="../img/icons/svg/economics.svg" class="svg">
+												<img src="./../../img/icons/svg/economics.svg" class="svg">
 											</div>
 											<div class="service-description">
 												<p>
@@ -178,7 +172,7 @@ $is_admin = preg_match($pattern, $referer);
 										<a href="#">
 
 											<div class="service-icon ground-icon-hover-color">
-												<img src="../img/icons/svg/ground.svg" class="svg">
+												<img src="./../../img/icons/svg/ground.svg" class="svg">
 											</div>
 											<div class="service-description">
 												<p>
@@ -201,7 +195,7 @@ $is_admin = preg_match($pattern, $referer);
 										<a href="#">
 
 											<div class="service-icon climate-icon-hover">
-												<img src="../img/icons/svg/climate.svg" class="svg">
+												<img src="./../../img/icons/svg/climate.svg" class="svg">
 											</div>
 											<div class="service-description">
 												<p>
@@ -225,7 +219,7 @@ $is_admin = preg_match($pattern, $referer);
 										<a href="#">
 
 											<div class="service-icon decade-data-icon-hover">
-												<img src="../img/icons/svg/clear_steam.svg" class="svg">
+												<img src="./../../img/icons/svg/clear_steam.svg" class="svg">
 											</div>
 											<div class="service-description">
 												<p>
@@ -271,7 +265,7 @@ $is_admin = preg_match($pattern, $referer);
 										<a href="/analyze_t.php">
 
 											<div class="service-icon temperature--hover-icon">
-												<img src="../img/icons/svg/deviations.svg" class="svg">
+												<img src="./../../img/icons/svg/deviations.svg" class="svg">
 											</div>
 											<div class="service-description">
 												<p>
@@ -294,7 +288,7 @@ $is_admin = preg_match($pattern, $referer);
 										<a href="/temperature_dynamic.php">
 
 											<div class="service-icon temperature--hover-icon">
-												<img src="../img/icons/svg/dynamic.svg" class="svg">
+												<img src="./../../img/icons/svg/dynamic.svg" class="svg">
 											</div>
 											<div class="service-description">
 												<p>
@@ -333,7 +327,7 @@ $is_admin = preg_match($pattern, $referer);
 										<a href="/analyze_p.php">
 
 											<div class="service-icon deviation-hover-icon">
-												<img src="../img/icons/svg/deviations.svg" class="svg">
+												<img src="./../../img/icons/svg/deviations.svg" class="svg">
 											</div>
 											<div class="service-description">
 												<p>
@@ -356,7 +350,7 @@ $is_admin = preg_match($pattern, $referer);
 										<a href="/precip_dynamic.php">
 
 											<div class="service-icon deviation-hover-icon">
-												<img src="../img/icons/svg/dynamic.svg" class="svg">
+												<img src="./../../img/icons/svg/dynamic.svg" class="svg">
 											</div>
 											<div class="service-description">
 												<p>
@@ -401,7 +395,7 @@ $is_admin = preg_match($pattern, $referer);
 										<a href="/gtk.php">
 
 											<div class="service-icon economics-icon-hover">
-												<img src="../img/icons/svg/gidro_coefficient.svg" class="svg">
+												<img src="./../../img/icons/svg/gidro_coefficient.svg" class="svg">
 											</div>
 											<div class="service-description">
 												<p>
@@ -424,7 +418,7 @@ $is_admin = preg_match($pattern, $referer);
 										<a href="/walter.php">
 
 											<div class="service-icon ground-icon-hover-color">
-												<img src="../img/icons/svg/valter.svg" class="svg">
+												<img src="./../../img/icons/svg/valter.svg" class="svg">
 											</div>
 											<div class="service-description">
 												<p>
@@ -447,7 +441,7 @@ $is_admin = preg_match($pattern, $referer);
 										<a href="/bcp.php">
 
 											<div class="service-icon climate-potential-hover-icon">
-												<img src="../img/icons/svg/climate_potential.svg" class="svg">
+												<img src="./../../img/icons/svg/climate_potential.svg" class="svg">
 											</div>
 											<div class="service-description">
 												<p>
@@ -471,7 +465,7 @@ $is_admin = preg_match($pattern, $referer);
 										<a href="/continent.php">
 
 											<div class="service-icon decade-data-icon-hover">
-												<img src="../img/icons/svg/mainland.svg" class="svg">
+												<img src="./../../img/icons/svg/mainland.svg" class="svg">
 											</div>
 											<div class="service-description">
 												<p>
@@ -517,7 +511,7 @@ $is_admin = preg_match($pattern, $referer);
 										<a href="/ylanova.php">
 
 											<div class="service-icon economics-icon-hover">
-												<img src="../img/icons/svg/ozimaya_wheat.svg" class="svg">
+												<img src="./../../img/icons/svg/ozimaya_wheat.svg" class="svg">
 											</div>
 											<div class="service-description">
 												<p>
@@ -540,7 +534,7 @@ $is_admin = preg_match($pattern, $referer);
 										<a href="sapojnikova.php">
 
 											<div class="service-icon ground-icon-hover-color">
-												<img src="../img/icons/svg/yaroviye.svg" class="svg">
+												<img src="./../../img/icons/svg/yaroviye.svg" class="svg">
 											</div>
 											<div class="service-description">
 												<p>
@@ -563,7 +557,7 @@ $is_admin = preg_match($pattern, $referer);
 										<a href="/melnik.php">
 
 											<div class="service-icon sunflower-hover-icon">
-												<img src="../img/icons/svg/sunflower.svg" class="svg">
+												<img src="./../../img/icons/svg/sunflower.svg" class="svg">
 											</div>
 											<div class="service-description">
 												<p>
@@ -587,7 +581,7 @@ $is_admin = preg_match($pattern, $referer);
 										<a href="/chirkov.php">
 
 											<div class="service-icon corn-hover-icon">
-												<img src="../img/icons/svg/corn.svg" class="svg">
+												<img src="./../../img/icons/svg/corn.svg" class="svg">
 											</div>
 											<div class="service-description">
 												<p>
@@ -633,7 +627,7 @@ $is_admin = preg_match($pattern, $referer);
 										<a href="analog_tp.php">
 
 											<div class="service-icon same-years-hover-icon">
-												<img src="../img/icons/svg/temperature_compearison.svg" class="svg">
+												<img src="./../../img/icons/svg/temperature_compearison.svg" class="svg">
 											</div>
 											<div class="service-description">
 												<p>
@@ -656,7 +650,7 @@ $is_admin = preg_match($pattern, $referer);
 										<a href="analog_demarton.php">
 
 											<div class="service-icon same-years-hover-icon">
-												<img src="../img/icons/svg/index_comparison.svg" class="svg">
+												<img src="./../../img/icons/svg/index_comparison.svg" class="svg">
 											</div>
 											<div class="service-description">
 												<p>
@@ -747,9 +741,9 @@ $is_admin = preg_match($pattern, $referer);
 
 
 
-    <link rel="stylesheet" href="../css/libs.css">
-    <link rel="stylesheet" href="../css/main.min.css">
-    <script src="../js/scripts.min.js"></script>
+    <link rel="stylesheet" href="./../../css/libs.css">
+    <link rel="stylesheet" href="./../../css/main.min.css">
+    <script src="./../../js/scripts.min.js"></script>
 
 </body>
 </html>

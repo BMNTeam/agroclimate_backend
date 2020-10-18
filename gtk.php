@@ -270,7 +270,7 @@ $ValueTitles = array('апрель', 'май', 'июнь', 'июль', 'авгу
                                                     {
                                                         if ($ValuesT[$i][$j] >= 10.0 && $ValuesT[$i][$j] != "NULL")
                                                         {
-                                                            $GTKCurValue = ($ValuesP[$i][$j]) / (0.1 * ($ValuesT[$i][$j] * $ValuesD[$i][$j]));
+                                                            $GTKCurValue = ($ValuesP[$i][$j] * 10) / ($ValuesT[$i][$j] * $ValuesD[$i][$j]);
                                                             $GTK[$j] += $GTKCurValue;
                                                             $SumT[$i] += $ValuesT[$i][$j] * $ValuesD[$i][$j];
                                                         }
