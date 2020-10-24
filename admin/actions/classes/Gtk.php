@@ -191,6 +191,17 @@ class Gtk
         $gtk_arr = calculate_gtk($permitted_months, $this->minimal_temperature);
 
         /**
+         * @param $gtk_arr array separated by months
+         * @return array $gtk array without empty keys
+         *         which should not be saved by requirements
+         */
+        function remove_if_invalid($gtk_arr) {
+            return array_filter($gtk_arr, function ($gtg) {
+                return preg_grep("/\d/", array_keys($gtg));
+            });
+        }
+
+        /**
          * @param $gtk_arr array of the separated by months
          * @return string concatenated string of temperatures, precipitations, days
          */
@@ -207,7 +218,8 @@ class Gtk
             return rtrim($str, ',');
         }
 
-        $gtk_str =  gtk_to_string($gtk_arr);
+        $filtered_gtk = remove_if_invalid($gtk_arr);
+        $gtk_str =  gtk_to_string($filtered_gtk);
         $this->set($gtk_str, $year, $meteostation_id);
 
     }
