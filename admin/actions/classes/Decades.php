@@ -42,7 +42,7 @@ class Decades {
          * @param array $post
          * @param array of decades columns
          * @return string SET values | example 'T1_1 = 12, ..., P12_3 = 6'
-        */
+         */
         function prepare_insert($post,$columns_arr)
         {
             $update = null;
@@ -56,8 +56,8 @@ class Decades {
         $set_sting = prepare_insert($post, $columns_arr);
         $this->helpers->clear_from_null($set_sting);
         $query = "UPDATE $this->table_name " .
-                 "SET $set_sting " .
-                 "WHERE Year = $year AND MeteostationID = $meteostation_id";
+            "SET $set_sting " .
+            "WHERE Year = $year AND MeteostationID = $meteostation_id";
         $this->db->prepare($query)->execute();
 
         $tp_table = new TP($this->db);
@@ -89,8 +89,7 @@ class Decades {
                     if($post[$param_str] === 'NULL'){ $sum = null; continue;};
                     $sum += $post[$param_str];
                 }
-                $average = $sum/3; //3 decades
-                if($average === 0) { $average = 'NULL';}; // Might be an error if average is equal to 0
+                $average = is_null($sum) ? 'NULL': $sum/3; //3 decades
 
                 $param_average = array("$param$m"=> $average); // Example | ['T1 => 12']
                 array_push($average_arr, $param_average);
@@ -116,7 +115,7 @@ class Decades {
                     if($post[$param_str] === 'NULL'){ $sum = null; continue;};
                     $sum += $post[$param_str];
                 }
-                (!$sum) ? $sum = 'NULL': $sum;
+                (is_null($sum)) ? $sum = 'NULL': $sum;
 
                 $param_sum = array("$param$m"=> $sum);
                 array_push($sum_arr, $param_sum);
@@ -137,7 +136,7 @@ class Decades {
                 {
 
                     $result[$key] = round($value, 2);
-                    if($value == 'NULL') { $result[$key] = 'NULL'; }; //If round returns 0 then explicitly set it NULL
+                    if($value === 'NULL') { $result[$key] = 'NULL'; }; //If round returns 0 then explicitly set it NULL
                 }
             }
             return $result;
@@ -162,12 +161,12 @@ class Decades {
         $year = date("Y");
 
         $sql = "CREATE TABLE IF NOT EXISTS $this->table_name" .
-                "(" .
-                  "ID INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,".
-                  "MeteostationID INT(6) DEFAULT NULL," .
-                  "Year INT(6) DEFAULT $year," .
-                  "$sql_decades" .
-                ")";
+            "(" .
+            "ID INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,".
+            "MeteostationID INT(6) DEFAULT NULL," .
+            "Year INT(6) DEFAULT $year," .
+            "$sql_decades" .
+            ")";
 
         $this->db->prepare($sql)->execute();
 
@@ -176,7 +175,7 @@ class Decades {
     /**
      * @param string $action specify insertion parameters
      * @return string $sql_decades | example 'T1_1, P1_1, ..., T12_3,P12_3,'
-    */
+     */
     private function generate_columns ($action = '')
     {
         $sql_decades = '';
@@ -207,7 +206,7 @@ class Decades {
 
 
         $query = "INSERT INTO $this->table_name (MeteostationID, Year, $decades)" .
-               "VALUES $values";
+            "VALUES $values";
         $this->db->prepare($query)->execute();
 
     }
@@ -229,7 +228,7 @@ class Decades {
      * @Param $dates JSON data
      * @return array $post without empty values
      *
-    */
+     */
     public function addNull($datas)
     {
         $post = array();
